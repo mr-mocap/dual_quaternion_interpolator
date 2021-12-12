@@ -16,10 +16,15 @@ public:
     explicit constexpr Dual(const value_type r, const value_type e) : real(r), dual(e) { }
     explicit constexpr Dual(const std::tuple<value_type, value_type> tuple) : real(std::get<0>(tuple)), dual(std::get<1>(tuple)) { }
 
+    Dual(const Dual<T> &) = default;
+    Dual(Dual<T> &&)      = default;
+    Dual<T> &operator =(const Dual<T> &) = default;
+    Dual<T> &operator =(Dual<T> &&) = default;
+
     constexpr static Dual<T> unit() { return Dual{ T{1}, T{} }; }
     constexpr static Dual<T> zero() { return Dual{}; }
 
-    constexpr Dual<T> conjugate(Dual<T> d) { return Dual{ conjugate(d.real), conjugate(d.dual) }; }
+    constexpr Dual<T> conjugate() const { return Dual{ ::conjugate(real), ::conjugate(dual) }; }
 
     friend constexpr bool approximately_equal_to(Dual<T> value_to_test, Dual<T> value_it_should_be, T tolerance)
     {

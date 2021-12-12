@@ -12,7 +12,18 @@ public:
     using value_type = T;
 
     Quaternion() = default;
-    explicit constexpr Quaternion(value_type w, value_type i, value_type j, value_type k) : _w(w), _i(i), _j(j), _k(k) { }
+    explicit constexpr Quaternion( value_type w, value_type i, value_type j, value_type k )
+        : _w( w )
+        , _i( i )
+        , _j( j )
+        , _k( k )
+    {
+    }
+
+    Quaternion(const Quaternion<T> &) = default;
+    Quaternion(Quaternion<T> &&) = default;
+    Quaternion<T> &operator =(const Quaternion<T> &) = default;
+    Quaternion<T> &operator =(Quaternion<T> &&) = default;
 
     constexpr static Quaternion<T> unit() { return Quaternion{ T{1}, T{}, T{}, T{} }; }
     constexpr static Quaternion<T> zero() { return Quaternion{}; }

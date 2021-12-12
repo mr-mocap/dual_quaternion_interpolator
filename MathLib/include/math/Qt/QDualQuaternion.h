@@ -31,6 +31,12 @@ public:
         return QVector3D { result.i(), result.j(), result.k() };
     }
 
+    QDualQuaternion& conjugate()
+    {
+        _dq = ::conjugate(_dq);
+        return *this;
+    }
+
     QDualQuaternion &operator +(const QDualQuaternion &right_side)
     {
         _dq = _dq + right_side._dq;
