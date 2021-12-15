@@ -28,7 +28,6 @@ Window {
                 orientation: Qt.Horizontal
                 Layout.fillWidth: true
                 Layout.fillHeight: false
-                Layout.preferredHeight: implicitHeight
             }
 
             Label {
@@ -37,7 +36,6 @@ Window {
                 horizontalAlignment: Text.AlignHCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: false
-                Layout.preferredHeight: implicitHeight
             }
 
             Rectangle {
