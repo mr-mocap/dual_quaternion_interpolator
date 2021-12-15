@@ -1,10 +1,13 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 
 Window {
-    width: 800
+    width: 600
     height: 600
+    x: 100
+    y: 100
     visible: true
     title: qsTr("Dual Quaternion Interpolator")
 
@@ -13,25 +16,36 @@ Window {
         anchors.fill: parent
         anchors.margins: 10
 
-        Slider {
-            id: interpolation_slider
-            from: 0
-            to: 100
-            orientation: Qt.Horizontal
+        ColumnLayout {
+            id: main_columnlayout
+            spacing: 20
+            anchors.fill: parent
 
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-        }
+            Slider {
+                id: interpolation_slider
+                from: 0
+                to: 100
+                orientation: Qt.Horizontal
+                Layout.fillWidth: true
+                Layout.fillHeight: false
+                Layout.preferredHeight: implicitHeight
+            }
 
-        Label {
-            id: slidervalue_label
-            text: interpolation_slider.value.toFixed(2) + "%"
-            anchors.top: interpolation_slider.bottom
-            anchors.topMargin: 10
-            anchors.left: interpolation_slider.left
-            anchors.right: interpolation_slider.right
-            horizontalAlignment: Text.AlignHCenter
+            Label {
+                id: slidervalue_label
+                text: interpolation_slider.value.toFixed(2) + "%"
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: false
+                Layout.preferredHeight: implicitHeight
+            }
+
+            Rectangle {
+                id: scene_rectangle
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: "darkRed"
+            }
         }
     }
 }
