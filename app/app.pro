@@ -1,4 +1,5 @@
 TEMPLATE = app
+
 QT += qml quick 3dinput
 
 # You can make your code fail to compile if it uses deprecated APIs.

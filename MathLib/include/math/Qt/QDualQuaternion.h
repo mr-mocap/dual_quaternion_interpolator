@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQuaternion>
 #include <QVector3D>
+#include <QtQml/QtQml>
 #include <math/DualQuaternion.h>
 
 class QDualQuaternion : public QObject
@@ -14,11 +15,11 @@ class QDualQuaternion : public QObject
     Q_PROPERTY( QQuaternion dual READ dual NOTIFY dualChanged )
     Q_PROPERTY( QQuaternion rotation    READ rotation    NOTIFY rotationChanged )
     Q_PROPERTY( QVector3D   translation READ translation NOTIFY translationChanged )
+
+    QML_ELEMENT
 public:
     explicit QDualQuaternion( QObject* parent = nullptr );
     explicit QDualQuaternion(DualQuaternionf q) : _dq( q ) { }
-
-    static void RegisterType();
 
     QQuaternion real() const { return QQuaternion { _dq.real.real(), _dq.real.i(), _dq.real.j(), _dq.real.k() }; }
     QQuaternion dual() const { return QQuaternion { _dq.dual.real(), _dq.dual.i(), _dq.dual.j(), _dq.dual.k() }; }
