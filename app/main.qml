@@ -53,7 +53,7 @@ Window {
                     aspects: [ "input", "logic" ]
                     cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
 
-                    Axes {
+                    AxesEntity {
                         id: origin_axes
                     }
                 }
