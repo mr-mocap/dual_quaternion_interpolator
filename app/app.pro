@@ -26,8 +26,6 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../MathLib/release/ -l
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../MathLib/debug/ -lMathLib
 else:unix: LIBS += -L$$OUT_PWD/../MathLib/ -lMathLib
 
-INCLUDEPATH += $$PWD/../MathLib
-DEPENDPATH += $$PWD/../MathLib
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../MathLib/release/libMathLib.a
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../MathLib/debug/libMathLib.a
