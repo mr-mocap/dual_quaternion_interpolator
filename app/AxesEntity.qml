@@ -49,14 +49,14 @@
 ****************************************************************************/
 
 import Qt3D.Core 2.0
-import Qt3D.Render 2.15
+import Qt3D.Render 2.12
 import Qt3D.Input 2.0
-import Qt3D.Extras 2.15
+import Qt3D.Extras 2.12
 
 
 Entity {
   id: sceneRoot
-  property RenderCapabilities capabilities : renderSettings.renderCapabilities
+  //property RenderCapabilities capabilities : renderSettings.renderCapabilities
   property real x_position : 0
   property real y_position : 0
   property real z_position : 0
@@ -80,7 +80,6 @@ Entity {
 	  activeFrameGraph: ForwardRenderer {
 	      camera: camera
 	      clearColor: "transparent"
-	      showDebugOverlay: false
 	  }
       },
       InputSettings { }
