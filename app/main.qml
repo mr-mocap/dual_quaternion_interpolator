@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import QtQuick.Scene3D 2.12
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
@@ -43,6 +44,19 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 color: "darkRed"
+
+                Scene3D {
+                    id: scene
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    focus: true
+                    aspects: [ "input", "logic" ]
+                    cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
+
+                    Axes {
+                        id: origin_axes
+                    }
+                }
             }
         }
     }
