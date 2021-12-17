@@ -1,15 +1,24 @@
 TEMPLATE = app
 
-QT += qml quick 3dinput
+QT += core qml quick 3dinput
+
+CONFIG += c++11
+CONFIG += qmltypes
+
+INCLUDEPATH *= include
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        QDualQuaternion.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
+
+QML_IMPORT_NAME = MathLib.Qt
+QML_IMPORT_MAJOR_VERSION = 1
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -33,4 +42,8 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../MathLib/debug/MathLib.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../MathLib/libMathLib.a
 
-DISTFILES +=
+DISTFILES += \
+    qmldir
+
+HEADERS += \
+    include/math/Qt/QDualQuaternion.h

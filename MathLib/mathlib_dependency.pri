@@ -1,4 +1,3 @@
 MATHLIB_DIR = ../MathLib
 
 INCLUDEPATH *= $$MATHLIB_DIR/include
-INCLUDEPATH *= $$MATHLIB_DIR/include/math/Qt

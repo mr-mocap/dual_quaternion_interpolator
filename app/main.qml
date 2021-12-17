@@ -3,6 +3,7 @@ import QtQuick.Scene3D 2.12
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import MathLib.Qt 1.0
 
 Window {
     width: 600
