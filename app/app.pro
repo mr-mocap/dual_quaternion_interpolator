@@ -48,4 +48,6 @@ DISTFILES += \
 HEADERS += \
     include/math/Qt/QDualQuaternion.h
 
-INCLUDEPATH *= include
+INCLUDEPATH *= ./include
+INCLUDEPATH *= ./include/math
+INCLUDEPATH *= ./include/math/Qt

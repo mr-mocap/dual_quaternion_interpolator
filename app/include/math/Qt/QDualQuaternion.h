@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QQuaternion>
 #include <QVector3D>
-#include <QtQml/QtQml>
-#include <math/DualQuaternion.h>
+#include <QtQml/qqml.h>
+#include "math/DualQuaternion.h"
 
 class QDualQuaternion : public QObject
 {
