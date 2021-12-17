@@ -1,11 +1,11 @@
 TEMPLATE = app
 
+include (mathlib_dependency.pri)
+
 QT += core qml quick 3dinput
 
 CONFIG += c++11
 CONFIG += qmltypes
-
-INCLUDEPATH *= include
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -47,3 +47,5 @@ DISTFILES += \
 
 HEADERS += \
     include/math/Qt/QDualQuaternion.h
+
+INCLUDEPATH *= include
