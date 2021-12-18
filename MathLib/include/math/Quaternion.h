@@ -4,6 +4,11 @@
 #include "math/Conjugate.h"
 #include <tuple>
 
+template<class T>
+using triple = std::tuple<T,T,T>;
+
+using triplef = triple<float>;
+using tripled = triple<double>;
 
 template<class T>
 class Quaternion
@@ -49,7 +54,7 @@ public:
     value_type j() const { return _j; }
     value_type k() const { return _k; }
 
-    constexpr std::tuple<value_type, value_type, value_type> imaginary() { return { _i, _j, _k }; }
+    constexpr triple<value_type> imaginary() const { return { _i, _j, _k }; }
 
     constexpr value_type accumulate(Quaternion<T> q) const { return q.w() + q.i() + q.j() + q.k(); }
 
@@ -161,14 +166,14 @@ constexpr T dot(Quaternion<T> left, Quaternion<T> right)
 }
 
 template<class T>
-constexpr Quaternion<T> make_pure_quaternion(std::tuple<T, T, T> t)
+constexpr Quaternion<T> make_pure_quaternion(triple<T> t)
 {
     return Quaternion<T>{ T(), std::get<0>(t), std::get<1>(t), std::get<2>(t) };
 }
 
 
 template<class T>
-constexpr Quaternion<T> make_quaternion_rotation(T radians, std::tuple<T, T, T> axis)
+constexpr Quaternion<T> make_quaternion_rotation(T radians, triple<T> axis)
 {
     return Quaternion<T>{ T(cos(radians / T{2})),
                           T(sin(radians / T{2}) * std::get<0>(axis)),

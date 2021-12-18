@@ -48,6 +48,7 @@
 **
 ****************************************************************************/
 
+
 import Qt3D.Core 2.0
 import Qt3D.Render 2.12
 import Qt3D.Input 2.12
@@ -62,7 +63,10 @@ Entity {
   property real y_position : 0
   property real z_position : 0
 
+  property QDualQuaternion coord_system
+
   QDualQuaternion {
+      id: coordinatesystem
   }
 
   Camera {

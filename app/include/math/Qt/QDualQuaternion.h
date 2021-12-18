@@ -11,10 +11,10 @@ class QDualQuaternion : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( QQuaternion real READ real NOTIFY realChanged )
-    Q_PROPERTY( QQuaternion dual READ dual NOTIFY dualChanged )
-    Q_PROPERTY( QQuaternion rotation    READ rotation    NOTIFY rotationChanged )
-    Q_PROPERTY( QVector3D   translation READ translation NOTIFY translationChanged )
+    Q_PROPERTY( QQuaternion real READ real NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion dual READ dual NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion rotation    READ rotation    NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   translation READ translation NOTIFY valueChanged )
 
     QML_ELEMENT
 public:
@@ -35,31 +35,35 @@ public:
     QDualQuaternion& conjugate()
     {
         _dq = ::conjugate(_dq);
+        emit valueChanged();
         return *this;
     }
 
     QDualQuaternion &operator +(const QDualQuaternion &right_side)
     {
         _dq = _dq + right_side._dq;
+        emit valueChanged();
         return *this;
     }
 
     QDualQuaternion &operator -(const QDualQuaternion &right_side)
     {
         _dq = _dq - right_side._dq;
+        emit valueChanged();
         return *this;
     }
 
     QDualQuaternion &operator *(const QDualQuaternion &right_side)
     {
         _dq = _dq * right_side._dq;
+        emit valueChanged();
         return *this;
     }
+public slots:
+    void set_coordinate_system(const QQuaternion &rotation, const QVector3D &translation);
+
 signals:
-    void realChanged();
-    void dualChanged();
-    void rotationChanged();
-    void translationChanged();
+    void valueChanged();
 
 protected:
     DualQuaternionf _dq;
