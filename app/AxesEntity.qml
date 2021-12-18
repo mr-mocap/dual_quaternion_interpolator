@@ -52,6 +52,7 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.12
 import Qt3D.Input 2.12
 import Qt3D.Extras 2.15
+import MathLib.Qt 1.0
 
 
 Entity {
@@ -60,6 +61,9 @@ Entity {
   property real x_position : 0
   property real y_position : 0
   property real z_position : 0
+
+  QDualQuaternion {
+  }
 
   Camera {
       id: camera
