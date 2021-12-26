@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>AxesEntity.qml</file>
+        <file>DualQuaternionView.qml</file>
+        <file>QuaternionView.qml</file>
     </qresource>
 </RCC>

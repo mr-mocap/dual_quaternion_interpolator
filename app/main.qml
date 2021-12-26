@@ -14,19 +14,51 @@ Window {
 
     Item {
         id: mainwindow_Item
+
         anchors.fill: parent
         anchors.margins: 10
 
         ColumnLayout {
             id: main_columnlayout
             spacing: 20
+
             anchors.fill: parent
+
+            RowLayout {
+                id: data_rowlayout
+                spacing: 20
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                DualQuaternionView {
+                    id: initial_dualquaternionview
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+
+                DualQuaternionView {
+                    id: interpolated_dualquaternionview
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+
+                DualQuaternionView {
+                    id: final_dualquaternionview
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+            }
 
             Slider {
                 id: interpolation_slider
                 from: 0
                 to: 100
                 orientation: Qt.Horizontal
+
                 Layout.fillWidth: true
                 Layout.fillHeight: false
             }
@@ -35,15 +67,17 @@ Window {
                 id: slidervalue_label
                 text: interpolation_slider.value.toFixed(2) + "%"
                 horizontalAlignment: Text.AlignHCenter
+
                 Layout.fillWidth: true
                 Layout.fillHeight: false
             }
 
             Rectangle {
                 id: scene_rectangle
+                color: "darkRed"
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                color: "darkRed"
 
                 Scene3D {
                     id: scene
