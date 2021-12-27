@@ -32,6 +32,34 @@ QDualQuaternion::QDualQuaternion(QObject *parent)
 
 }
 
+QDualQuaternion::QDualQuaternion(const QDualQuaternion &dq)
+    :
+    QObject()
+    , _dq(dq._dq)
+{
+}
+
+QDualQuaternion::QDualQuaternion(QDualQuaternion &&dq)
+    :
+    _dq(dq._dq)
+{
+}
+
+QDualQuaternion &QDualQuaternion::operator =(const QDualQuaternion &p)
+{
+    if (this != &p)
+    {
+        _dq = p._dq;
+    }
+    return *this;
+}
+
+QDualQuaternion &QDualQuaternion::operator =(QDualQuaternion &&p)
+{
+    _dq = std::move(p._dq);
+    return *this;
+}
+
 void QDualQuaternion::set_coordinate_system( const QQuaternion &rotation, const QVector3D &translation )
 {
     _dq = ::make_coordinate_system( ToQuaternionf( rotation ), ToTuple( translation ) );
@@ -43,7 +71,16 @@ void QDualQuaternion::set_coordinate_system( const float rotation, const QVector
     set_coordinate_system( QQuaternion::fromAxisAndAngle(rotation_axes, rotation) , translation );
 }
 
-void QDualQuaternion::set_interpolated_value( const QDualQuaternion &initial,
+void QDualQuaternion::set_interpolated_value(const QVariant &initial, const QVariant &final, const float t)
+{
+    // NOTE:  Why are the initial and final always a default-constructed object?
+    QDualQuaternion begin = initial.value<QDualQuaternion>();
+    QDualQuaternion end   = final.value<QDualQuaternion>();
+
+    set_interpolated_value2( begin, end, t );
+}
+
+void QDualQuaternion::set_interpolated_value2( const QDualQuaternion &initial,
                                               const QDualQuaternion &final,
                                               const float            t )
 {

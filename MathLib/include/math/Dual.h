@@ -16,10 +16,23 @@ public:
     explicit constexpr Dual(const value_type r, const value_type e) : real(r), dual(e) { }
     explicit constexpr Dual(const std::tuple<value_type, value_type> tuple) : real(std::get<0>(tuple)), dual(std::get<1>(tuple)) { }
 
-    Dual(const Dual<T> &) = default;
-    Dual(Dual<T> &&)      = default;
-    Dual<T> &operator =(const Dual<T> &) = default;
-    Dual<T> &operator =(Dual<T> &&) = default;
+    Dual(const Dual<T> &d) : real(d.real), dual(d.dual) { }
+    Dual(Dual<T> &&d) : real( std::move(d.real) ), dual( std::move(d.dual) ) { }
+    Dual<T> &operator =(const Dual<T> &other)
+    {
+        if (this != &other)
+        {
+            real = other.real;
+            dual = other.dual;
+        }
+        return *this;
+    }
+    Dual<T> &operator =(Dual<T> &&d)
+    {
+        real = std::move(d.real);
+        dual = std::move(d.dual);
+        return *this;
+    }
 
     constexpr static Dual<T> unit() { return Dual{ T{1}, T{} }; }
     constexpr static Dual<T> zero() { return Dual{}; }

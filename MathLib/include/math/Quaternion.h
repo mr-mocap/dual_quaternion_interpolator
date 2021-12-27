@@ -25,9 +25,19 @@ public:
     {
     }
 
-    Quaternion(const Quaternion<T> &) = default;
-    Quaternion(Quaternion<T> &&) = default;
-    Quaternion<T> &operator =(const Quaternion<T> &) = default;
+    Quaternion(const Quaternion<T> &q) : _w(q._w), _i(q._i), _j(q._j), _k(q._k) { }
+    Quaternion(Quaternion<T> &&q) : _w(std::move(q._w)), _i(std::move(q._i)), _j(std::move(q._j)), _k(std::move(q._k)) { }
+    Quaternion<T> &operator =(const Quaternion<T> &q)
+    {
+        if (this != &q)
+        {
+            _w = q._w;
+            _i = q._i;
+            _j = q._j;
+            _k = q._k;
+        }
+        return *this;
+    }
     Quaternion<T> &operator =(Quaternion<T> &&) = default;
 
     constexpr static Quaternion<T> unit() { return Quaternion{ T{1}, T{}, T{}, T{} }; }

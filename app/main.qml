@@ -70,7 +70,11 @@ Window {
                 orientation: Qt.Horizontal
 
                 onMoved: {
-                    interpolated_dualquaternionview.model.set_interpolated_value(initial_dualquaternionview.model, final_dualquaternionview.model, position)
+                    //var begin = initial_dualquaternionview.model
+                    //var end   = final_dualquaternionview.model
+
+                    interpolated_dualquaternionview.model.set_interpolated_value2(initial_dualquaternionview.model, final_dualquaternionview.model, position)
+                    //interpolated_dualquaternionview.model.set_interpolated_value(begin, end, position)
                 }
 
                 Layout.fillWidth: true
@@ -106,36 +110,36 @@ Window {
 
 //                        position: initial_dualquaternionview.model.translation
 //                    }
-                    AxisHelper {
-                        id: origin_axes
-                        enableAxisLines: true
-                        position: initial_dualquaternionview.model.translation
-                        rotation: initial_dualquaternionview.model.rotation
-                    }
+//                    AxisHelper {
+//                        id: origin_axes
+//                        enableAxisLines: true
+//                        position: initial_dualquaternionview.model.translation
+//                        rotation: initial_dualquaternionview.model.rotation
+//                    }
 
 //                    AxesEntity {
 //                        id: interpolated_axes
 
 //                        position: interpolated_dualquaternionview.model.translation
 //                    }
-                    AxisHelper {
-                        id: interpolated_axes
-                        enableAxisLines: true
-                        position: interpolated_dualquaternionview.model.translation
-                        rotation: interpolated_dualquaternionview.model.rotation
-                    }
+//                    AxisHelper {
+//                        id: interpolated_axes
+//                        enableAxisLines: true
+//                        position: interpolated_dualquaternionview.model.translation
+//                        rotation: interpolated_dualquaternionview.model.rotation
+//                    }
 
 //                    AxesEntity {
 //                        id: destination_axes
 
 //                        position: final_dualquaternionview.model.translation
 //                    }
-                    AxisHelper {
-                        id: destination_axes
-                        enableAxisLines: true
-                        position: final_dualquaternionview.model.translation
-                        rotation: final_dualquaternionview.model.rotation
-                    }
+//                    AxisHelper {
+//                        id: destination_axes
+//                        enableAxisLines: true
+//                        position: final_dualquaternionview.model.translation
+//                        rotation: final_dualquaternionview.model.rotation
+//                    }
                 }
             }
         }
