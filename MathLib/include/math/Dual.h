@@ -50,9 +50,21 @@ constexpr Dual<T> operator *(float scalar, Dual<T> d)
 }
 
 template<class T>
+constexpr Dual<T> operator *(Dual<T> d, float scalar)
+{
+    return Dual<T>(d.real * scalar, d.dual * scalar);
+}
+
+template<class T>
 constexpr Dual<T> operator *(double scalar, Dual<T> d)
 {
     return Dual<T>(scalar * d.real, scalar * d.dual);
+}
+
+template<class T>
+constexpr Dual<T> operator *(Dual<T> d, double scalar)
+{
+    return Dual<T>(d.real * scalar, d.dual * scalar);
 }
 
 template<class T>

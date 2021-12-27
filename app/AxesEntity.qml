@@ -58,9 +58,7 @@ import Qt3D.Extras 2.15
 Entity {
   id: sceneRoot
   //property RenderCapabilities capabilities : renderSettings.renderCapabilities
-  property real x_position : 0
-  property real y_position : 0
-  property real z_position : 0
+  property vector3d position: Qt.vector3d(0, 0, 0)
 
   //property QDualQuaternion coord_system
 
@@ -97,7 +95,7 @@ Entity {
   Entity {
     Transform {
 	id: transform
-	translation: Qt.vector3d(x_position, y_position, z_position)
+    translation: position
     }
     Entity {
 	Transform {

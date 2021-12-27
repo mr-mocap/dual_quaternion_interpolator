@@ -1,10 +1,19 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import QtQuick3D 1.15
+import MathLib.Qt 1.0
 
 Rectangle {
     border.width: 1
-    border.color: black
+    border.color: "black"
+
+    property QDualQuaternion model: QDualQuaternion {
+        onValueChanged: {
+            rotation_view.model = real
+            translation_view.model = dual
+        }
+    }
 
     ColumnLayout {
         id: main_columnlayout

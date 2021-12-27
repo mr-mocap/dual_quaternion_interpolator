@@ -51,3 +51,6 @@ HEADERS += \
 INCLUDEPATH *= ./include
 INCLUDEPATH *= ./include/math
 INCLUDEPATH *= ./include/math/Qt
+
+qml.files = *.qml
+qml.path = $$DESTPATH

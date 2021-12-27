@@ -32,8 +32,23 @@ QDualQuaternion::QDualQuaternion(QObject *parent)
 
 }
 
-void QDualQuaternion::set_coordinate_system( const QQuaternion& rotation, const QVector3D& translation )
+void QDualQuaternion::set_coordinate_system( const QQuaternion &rotation, const QVector3D &translation )
 {
     _dq = ::make_coordinate_system( ToQuaternionf( rotation ), ToTuple( translation ) );
     emit valueChanged();
+}
+
+void QDualQuaternion::set_coordinate_system( const float rotation, const QVector3D& rotation_axes, const QVector3D& translation )
+{
+    set_coordinate_system( QQuaternion::fromAxisAndAngle(rotation_axes, rotation) , translation );
+}
+
+void QDualQuaternion::set_interpolated_value( const QDualQuaternion &initial,
+                                              const QDualQuaternion &final,
+                                              const float            t )
+{
+    if ( t >= 0.0 && t <= 1.0 ) {
+        _dq = initial._dq + ( final._dq - initial._dq ) * t;
+        emit valueChanged();
+    }
 }

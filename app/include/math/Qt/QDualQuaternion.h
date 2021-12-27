@@ -32,7 +32,7 @@ public:
         return QVector3D { result.i(), result.j(), result.k() };
     }
 
-    QDualQuaternion& conjugate()
+    QDualQuaternion &conjugate()
     {
         _dq = ::conjugate(_dq);
         emit valueChanged();
@@ -61,6 +61,8 @@ public:
     }
 public slots:
     void set_coordinate_system(const QQuaternion &rotation, const QVector3D &translation);
+    void set_coordinate_system(const float rotation, const QVector3D &rotation_axes, const QVector3D &translation);
+    void set_interpolated_value(const QDualQuaternion &initial, const QDualQuaternion &final, const float t);
 
 signals:
     void valueChanged();
