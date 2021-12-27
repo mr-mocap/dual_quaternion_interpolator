@@ -60,6 +60,28 @@ QDualQuaternion &QDualQuaternion::operator =(QDualQuaternion &&p)
     return *this;
 }
 
+void QDualQuaternion::setRotation(const QQuaternion &r)
+{
+    // Transform it into the form needed in the dual part...
+    DualQuaternionf new_object = make_coordinate_system( Quaternionf(r.scalar(), r.x(), r.y(), r.z()), _dq.dual.imaginary() ); // Use the existing translation
+
+    if (new_object != _dq) {
+        _dq = new_object;
+        emit valueChanged();
+    }
+}
+
+void QDualQuaternion::setTranslation(const QVector3D &t)
+{
+    // Transform it into the form needed in the dual part...
+    DualQuaternionf new_object = make_coordinate_system(_dq.real, { t.x(), t.y(), t.z() }); // Use the existing rotation
+
+    if (new_object != _dq) {
+        _dq = new_object;
+        emit valueChanged();
+    }
+}
+
 void QDualQuaternion::set_coordinate_system( const QQuaternion &rotation, const QVector3D &translation )
 {
     _dq = ::make_coordinate_system( ToQuaternionf( rotation ), ToTuple( translation ) );
@@ -71,7 +93,7 @@ void QDualQuaternion::set_coordinate_system( const float rotation, const QVector
     set_coordinate_system( QQuaternion::fromAxisAndAngle(rotation_axes, rotation) , translation );
 }
 
-void QDualQuaternion::set_interpolated_value(const QVariant &initial, const QVariant &final, const float t)
+void QDualQuaternion::set_interpolated_value(QVariant initial, QVariant final, const float t)
 {
     // NOTE:  Why are the initial and final always a default-constructed object?
     QDualQuaternion begin = initial.value<QDualQuaternion>();

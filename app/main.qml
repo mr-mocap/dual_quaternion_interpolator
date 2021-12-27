@@ -1,9 +1,9 @@
-import QtQuick 2.2
+import QtQuick 2.15
 import QtQuick.Scene3D 2.12
 import QtQuick3D 1.15
-import QtQuick.Window 2.0
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import QtQuick3D.Helpers 1.15
 
 Window {
@@ -70,11 +70,11 @@ Window {
                 orientation: Qt.Horizontal
 
                 onMoved: {
-                    //var begin = initial_dualquaternionview.model
-                    //var end   = final_dualquaternionview.model
+                    var begin = initial_dualquaternionview.model
+                    var end   = final_dualquaternionview.model
 
-                    interpolated_dualquaternionview.model.set_interpolated_value2(initial_dualquaternionview.model, final_dualquaternionview.model, position)
-                    //interpolated_dualquaternionview.model.set_interpolated_value(begin, end, position)
+                    //interpolated_dualquaternionview.model.set_interpolated_value2(initial_dualquaternionview.model, final_dualquaternionview.model, position)
+                    interpolated_dualquaternionview.model.set_interpolated_value(begin, end, position)
                 }
 
                 Layout.fillWidth: true

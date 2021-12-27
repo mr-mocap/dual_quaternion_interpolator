@@ -13,8 +13,8 @@ class QDualQuaternion : public QObject
 
     Q_PROPERTY( QQuaternion real READ real NOTIFY valueChanged )
     Q_PROPERTY( QQuaternion dual READ dual NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion rotation    READ rotation    NOTIFY valueChanged )
-    Q_PROPERTY( QVector3D   translation READ translation NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   translation READ translation WRITE setTranslation NOTIFY valueChanged )
 
     QML_ELEMENT
 public:
@@ -37,6 +37,9 @@ public:
 
         return QVector3D { result.i(), result.j(), result.k() };
     }
+
+    void setRotation(const QQuaternion &r);
+    void setTranslation(const QVector3D &t);
 
     QDualQuaternion &conjugate()
     {
@@ -65,10 +68,11 @@ public:
         emit valueChanged();
         return *this;
     }
+
 public slots:
     void set_coordinate_system(const QQuaternion &rotation, const QVector3D &translation);
     void set_coordinate_system(const float rotation, const QVector3D &rotation_axes, const QVector3D &translation);
-    void set_interpolated_value(const QVariant &initial, const QVariant &final, const float t);
+    void set_interpolated_value(QVariant initial, QVariant final, const float t);
     void set_interpolated_value2(const QDualQuaternion &initial, const QDualQuaternion &final, const float t);
 
 signals:

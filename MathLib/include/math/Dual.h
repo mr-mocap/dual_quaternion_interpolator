@@ -136,6 +136,19 @@ constexpr Dual<T> operator -(double scalar, Dual<T> d)
 }
 
 template<class T>
+constexpr bool operator ==(Dual<T> left, Dual<T> right)
+{
+    return (left.real == right.real) &&
+           (left.dual == right.dual);
+}
+
+template<class T>
+constexpr bool operator !=(Dual<T> left, Dual<T> right)
+{
+    return !(left == right);
+}
+
+template<class T>
 constexpr T dot(Dual<T> left, Dual<T> right)
 {
     return left.real * right.real +
