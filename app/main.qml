@@ -5,6 +5,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick3D.Helpers 1.15
+import MathLib.Qt 1.0
 
 Window {
     width: 900
@@ -15,14 +16,16 @@ Window {
     title: qsTr("Dual Quaternion Interpolator")
 
     Component.onCompleted: {
-        qq_interpolator.first.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 0),
+        dq_interpolator.first.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 0),
                                                      Qt.vector3d(0, 0, 0))
-        qq_interpolator.second.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 90),
+        dq_interpolator.second.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 90),
                                                       Qt.vector3d(0, 1 * 20, 0))
     }
 
     QDualQuaternionInterpolator {
-        id: qq_interpolator
+        id: dq_interpolator
+
+        fraction: interpolation_slider.position
     }
 
     Item {
@@ -47,7 +50,7 @@ Window {
                 DualQuaternionView {
                     id: initial_dualquaternionview
 
-                    model: dualquaternioninterpolator.first
+                    model: dq_interpolator.first
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -56,7 +59,7 @@ Window {
                 DualQuaternionView {
                     id: interpolated_dualquaternionview
 
-                    model: dualquaternioninterpolator.result
+                    model: dq_interpolator.result
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -65,7 +68,7 @@ Window {
                 DualQuaternionView {
                     id: final_dualquaternionview
 
-                    model: dualquaternioninterpolator.second
+                    model: dq_interpolator.second
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -76,15 +79,8 @@ Window {
                 id: interpolation_slider
                 from: 0
                 to: 100
+                live: true
                 orientation: Qt.Horizontal
-
-                onMoved: {
-                    var begin = initial_dualquaternionview.model
-                    var end   = final_dualquaternionview.model
-
-                    //interpolated_dualquaternionview.model.set_interpolated_value2(initial_dualquaternionview.model, final_dualquaternionview.model, position)
-                    interpolated_dualquaternionview.model.set_interpolated_value(begin, end, position)
-                }
 
                 Layout.fillWidth: true
                 Layout.fillHeight: false
@@ -106,13 +102,13 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                Scene3D {
-                    id: scene
-                    anchors.fill: parent
-                    anchors.margins: 10
-                    focus: true
-                    aspects: [ "input", "logic" ]
-                    cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
+//                Scene3D {
+//                    id: scene
+//                    anchors.fill: parent
+//                    anchors.margins: 10
+//                    focus: true
+//                    aspects: [ "input", "logic" ]
+//                    cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
 
 //                    AxesEntity {
 //                        id: origin_axes
@@ -149,7 +145,7 @@ Window {
 //                        position: final_dualquaternionview.model.translation
 //                        rotation: final_dualquaternionview.model.rotation
 //                    }
-                }
+//                }
             }
         }
     }

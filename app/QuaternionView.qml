@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 import QtQml 2.15
 
 Item {
-    property quaternion model: Qt.quaternion(1.0, 0.0, 0.0, 0.0)
+    property quaternion value: Qt.quaternion(1.0, 0.0, 0.0, 0.0)
 
     RowLayout {
         id: values_rowlayout
@@ -14,7 +14,7 @@ Item {
 
         Text {
             id: scalar_text
-            text: model.scalar.toFixed(3)
+            text: value.scalar.toFixed(3)
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -22,7 +22,7 @@ Item {
 
         Text {
             id: x_text
-            text: model.x.toFixed(3)
+            text: value.x.toFixed(3)
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -30,7 +30,7 @@ Item {
 
         Text {
             id: y_text
-            text: model.y.toFixed(3)
+            text: value.y.toFixed(3)
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -38,7 +38,7 @@ Item {
 
         Text {
             id: z_text
-            text: model.z.toFixed(3)
+            text: value.z.toFixed(3)
 
             Layout.fillWidth: true
             Layout.fillHeight: true

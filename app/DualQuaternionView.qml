@@ -9,7 +9,8 @@ Rectangle {
     border.width: 1
     border.color: "black"
 
-    property QDualQuaternion model;
+    property QDualQuaternion model: QDualQuaternion {
+    }
 
     ColumnLayout {
         id: main_columnlayout
@@ -34,7 +35,7 @@ Rectangle {
             QuaternionView {
                 id: rotation_view
 
-                model: base.model.real
+                value: base.model.real
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -58,7 +59,7 @@ Rectangle {
             QuaternionView {
                 id: translation_view
 
-                model: base.model.dual
+                value: base.model.dual
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
