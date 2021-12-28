@@ -1,26 +1,17 @@
 #include "math/Qt/QDualQuaternion.h"
 
 
-namespace {
-
-constexpr auto ToTuple( QVector3D v ) -> triple<float>
+namespace
 {
-    return std::make_tuple( v.x(), v.y(), v.z() );
+
+constexpr auto ToTriple(QVector3D *v) -> triple<float>
+{
+    return std::make_tuple( v->x(), v->y(), v->z() );
 }
 
-inline auto ToQuaternionf( const QQuaternion& r ) -> Quaternionf
+inline auto ToQuaternionf(QQuaternion *q) -> Quaternionf
 {
-    return Quaternionf { r.scalar(), r.x(), r.y(), r.z() };
-}
-
-constexpr auto ToQVector3D( triplef t ) -> QVector3D
-{
-    return QVector3D { std::get<0>( t ), std::get<1>( t ), std::get<2>( t ) };
-}
-
-inline auto ToQQuaternion(Quaternionf q) -> QQuaternion
-{
-    return QQuaternion{ q.real(), q.i(), q.j(), q.k() };
+    return Quaternionf(q->scalar(), q->x(), q->y(), q->z());
 }
 
 }
@@ -28,86 +19,64 @@ inline auto ToQQuaternion(Quaternionf q) -> QQuaternion
 
 QDualQuaternion::QDualQuaternion(QObject *parent)
     : QObject{parent}
+    , _dq{ Quaternionf::unit(), Quaternionf::zero() }
+    , _real{ _dq.real.real(), _dq.real.i(), _dq.real.j(), _dq.real.k() }
+    , _dual{ _dq.dual.real(), _dq.dual.i(), _dq.dual.j(), _dq.dual.k() }
 {
-
+    extractTranslation(_dq);
 }
 
-QDualQuaternion::QDualQuaternion(const QDualQuaternion &dq)
-    :
-    QObject()
-    , _dq(dq._dq)
-{
-}
-
-QDualQuaternion::QDualQuaternion(QDualQuaternion &&dq)
-    :
-    _dq(dq._dq)
-{
-}
-
-QDualQuaternion &QDualQuaternion::operator =(const QDualQuaternion &p)
-{
-    if (this != &p)
-    {
-        _dq = p._dq;
-    }
-    return *this;
-}
-
-QDualQuaternion &QDualQuaternion::operator =(QDualQuaternion &&p)
-{
-    _dq = std::move(p._dq);
-    return *this;
-}
-
-void QDualQuaternion::setRotation(const QQuaternion &r)
+void QDualQuaternion::setRotation(QQuaternion *r)
 {
     // Transform it into the form needed in the dual part...
-    DualQuaternionf new_object = make_coordinate_system( Quaternionf(r.scalar(), r.x(), r.y(), r.z()), _dq.dual.imaginary() ); // Use the existing translation
+    DualQuaternionf new_object = make_coordinate_system( ToQuaternionf(r), _dq.dual.imaginary() ); // Use the existing translation
 
-    if (new_object != _dq) {
-        _dq = new_object;
-        emit valueChanged();
-    }
+    setDualQuaternionf(new_object);
 }
 
-void QDualQuaternion::setTranslation(const QVector3D &t)
+void QDualQuaternion::setTranslation(QVector3D *t)
 {
     // Transform it into the form needed in the dual part...
-    DualQuaternionf new_object = make_coordinate_system(_dq.real, { t.x(), t.y(), t.z() }); // Use the existing rotation
+    DualQuaternionf new_object = make_coordinate_system(_dq.real, ToTriple(t)); // Use the existing rotation
 
-    if (new_object != _dq) {
-        _dq = new_object;
+    setDualQuaternionf(new_object);
+}
+
+void QDualQuaternion::setDualQuaternionf(const DualQuaternionf &dq)
+{
+    if (dq != _dq) {
+        _dq = dq;
+        extractParts(_dq);
+        extractTranslation(_dq);
         emit valueChanged();
     }
 }
 
-void QDualQuaternion::set_coordinate_system( const QQuaternion &rotation, const QVector3D &translation )
+void QDualQuaternion::extractTranslation(const DualQuaternionf &dq)
 {
-    _dq = ::make_coordinate_system( ToQuaternionf( rotation ), ToTuple( translation ) );
-    emit valueChanged();
+    Quaternionf result { 2.0f * dq.dual * dq.real.inverse() };
+
+    _translation.setX( result.i() );
+    _translation.setY( result.j() );
+    _translation.setZ( result.k() );
 }
 
-void QDualQuaternion::set_coordinate_system( const float rotation, const QVector3D& rotation_axes, const QVector3D& translation )
+void QDualQuaternion::extractParts(const DualQuaternionf &dq)
 {
-    set_coordinate_system( QQuaternion::fromAxisAndAngle(rotation_axes, rotation) , translation );
+    _real.setScalar( dq.real.real() );
+    _real.setX( dq.real.i() );
+    _real.setY( dq.real.j() );
+    _real.setZ( dq.real.k() );
+
+    _dual.setScalar( dq.dual.real() );
+    _dual.setX( dq.dual.i() );
+    _dual.setY( dq.dual.j() );
+    _dual.setZ( dq.dual.k() );
 }
 
-void QDualQuaternion::set_interpolated_value(QVariant initial, QVariant final, const float t)
+void QDualQuaternion::set_coordinate_system(QQuaternion *rotation, QVector3D *translation)
 {
-    // NOTE:  Why are the initial and final always a default-constructed object?
-    QDualQuaternion begin = initial.value<QDualQuaternion>();
-    QDualQuaternion end   = final.value<QDualQuaternion>();
+    DualQuaternionf coord_sys = ::make_coordinate_system( ToQuaternionf(rotation), ToTriple(translation) );
 
-    set_interpolated_value2( begin, end, t );
-}
-
-void QDualQuaternion::set_interpolated_value2( const QDualQuaternion &initial,
-                                              const QDualQuaternion &final,
-                                              const float            t )
-{
-    if ( t >= 0.0 && t <= 1.0 ) {
-        _dq = initial._dq + ( final._dq - initial._dq ) * t;
-        emit valueChanged();
-    }
+    setDualQuaternionf(coord_sys);
 }

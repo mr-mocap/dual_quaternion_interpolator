@@ -4,7 +4,7 @@ include (mathlib_dependency.pri)
 
 QT += core gui qml quick 3dinput
 
-CONFIG += c++11
+CONFIG += c++17
 CONFIG += qmltypes
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -13,6 +13,7 @@ CONFIG += qmltypes
 
 SOURCES += \
         QDualQuaternion.cpp \
+        QDualQuaternionInterpolator.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -46,7 +47,8 @@ DISTFILES += \
     qmldir
 
 HEADERS += \
-    include/math/Qt/QDualQuaternion.h
+    include/math/Qt/QDualQuaternion.h \
+    include/math/Qt/QDualQuaternionInterpolator.h
 
 INCLUDEPATH *= ./include
 INCLUDEPATH *= ./include/math

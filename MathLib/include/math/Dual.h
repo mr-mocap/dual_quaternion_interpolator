@@ -13,7 +13,7 @@ public:
 
     Dual() = default;
     explicit constexpr Dual(const value_type r) : real(r) { }
-    explicit constexpr Dual(const value_type r, const value_type e) : real(r), dual(e) { }
+    explicit constexpr Dual(const value_type r, const value_type d) : real(r), dual(d) { }
     explicit constexpr Dual(const std::tuple<value_type, value_type> tuple) : real(std::get<0>(tuple)), dual(std::get<1>(tuple)) { }
 
     Dual(const Dual<T> &d) : real(d.real), dual(d.dual) { }

@@ -15,11 +15,14 @@ Window {
     title: qsTr("Dual Quaternion Interpolator")
 
     Component.onCompleted: {
-        initial_dualquaternionview.model.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 0),
-                                                                Qt.vector3d(0, 0, 0))
-        final_dualquaternionview.model.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 90),
-                                                              Qt.vector3d(0, 1 * 20, 0))
-        interpolated_dualquaternionview.model.set_interpolated_value(initial_dualquaternionview.model, final_dualquaternionview.model, position)
+        qq_interpolator.first.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 0),
+                                                     Qt.vector3d(0, 0, 0))
+        qq_interpolator.second.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 90),
+                                                      Qt.vector3d(0, 1 * 20, 0))
+    }
+
+    QDualQuaternionInterpolator {
+        id: qq_interpolator
     }
 
     Item {
@@ -44,6 +47,8 @@ Window {
                 DualQuaternionView {
                     id: initial_dualquaternionview
 
+                    model: dualquaternioninterpolator.first
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
@@ -51,12 +56,16 @@ Window {
                 DualQuaternionView {
                     id: interpolated_dualquaternionview
 
+                    model: dualquaternioninterpolator.result
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
 
                 DualQuaternionView {
                     id: final_dualquaternionview
+
+                    model: dualquaternioninterpolator.second
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true

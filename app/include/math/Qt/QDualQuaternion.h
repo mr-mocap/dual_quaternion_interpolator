@@ -11,78 +11,56 @@ class QDualQuaternion : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( QQuaternion real READ real NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion dual READ dual NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
-    Q_PROPERTY( QVector3D   translation READ translation WRITE setTranslation NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion *real READ real NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion *dual READ dual NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion *rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   *translation READ translation WRITE setTranslation NOTIFY valueChanged )
 
     QML_ELEMENT
 public:
     explicit QDualQuaternion( QObject* parent = nullptr );
-    explicit QDualQuaternion(DualQuaternionf q) : _dq( q ) { }
 
-    QDualQuaternion(const QDualQuaternion &dq);
-    QDualQuaternion(QDualQuaternion &&);
-    QDualQuaternion &operator =(const QDualQuaternion &);
-    QDualQuaternion &operator =(QDualQuaternion &&);
+    QQuaternion *real() { return &_real; }
+    QQuaternion *dual() { return &_dual; }
 
-    QQuaternion real() const { return QQuaternion { _dq.real.real(), _dq.real.i(), _dq.real.j(), _dq.real.k() }; }
-
-    QQuaternion dual() const { return QQuaternion { _dq.dual.real(), _dq.dual.i(), _dq.dual.j(), _dq.dual.k() }; }
-
-    QQuaternion rotation() const { return QQuaternion { _dq.real.real(), _dq.real.i(), _dq.real.j(), _dq.real.k() }; }
-    QVector3D   translation() const
+    QQuaternion *rotation() { return real(); }
+    QVector3D   *translation()
     {
-        Quaternionf result { 2.0f * _dq.dual * _dq.real.inverse() };
-
-        return QVector3D { result.i(), result.j(), result.k() };
+        return &_translation;
     }
 
-    void setRotation(const QQuaternion &r);
-    void setTranslation(const QVector3D &t);
+    void setRotation(QQuaternion *r);
+    void setTranslation(QVector3D *t);
 
-    QDualQuaternion &conjugate()
-    {
-        _dq = ::conjugate(_dq);
-        emit valueChanged();
-        return *this;
-    }
-
-    QDualQuaternion &operator +(const QDualQuaternion &right_side)
-    {
-        _dq = _dq + right_side._dq;
-        emit valueChanged();
-        return *this;
-    }
-
-    QDualQuaternion &operator -(const QDualQuaternion &right_side)
-    {
-        _dq = _dq - right_side._dq;
-        emit valueChanged();
-        return *this;
-    }
-
-    QDualQuaternion &operator *(const QDualQuaternion &right_side)
-    {
-        _dq = _dq * right_side._dq;
-        emit valueChanged();
-        return *this;
-    }
+    // Allows for getting/setting the underlying object
+    const DualQuaternionf &dualQuaternionf() const { return _dq; };
+    void setDualQuaternionf(const DualQuaternionf &dq);
 
 public slots:
-    void set_coordinate_system(const QQuaternion &rotation, const QVector3D &translation);
-    void set_coordinate_system(const float rotation, const QVector3D &rotation_axes, const QVector3D &translation);
-    void set_interpolated_value(QVariant initial, QVariant final, const float t);
-    void set_interpolated_value2(const QDualQuaternion &initial, const QDualQuaternion &final, const float t);
+    void set_coordinate_system(QQuaternion *rotation, QVector3D *translation);
 
 signals:
     void valueChanged();
 
 protected:
     DualQuaternionf _dq;
+    QQuaternion _real;
+    QQuaternion _dual;
+    QVector3D   _translation;
 
+    void extractTranslation(const DualQuaternionf &dq);
+    void extractParts(const DualQuaternionf &dq);
 };
 
-Q_DECLARE_METATYPE(QDualQuaternion)
+
+inline bool operator ==(const QDualQuaternion &dq1, const QDualQuaternion &dq2)
+{
+    return dq1.dualQuaternionf() == dq2.dualQuaternionf();
+}
+
+inline bool operator !=(const QDualQuaternion &dq1, const QDualQuaternion &dq2)
+{
+    return !operator ==(dq1, dq2);
+}
 
 #endif // QDUALQUATERNION_H
