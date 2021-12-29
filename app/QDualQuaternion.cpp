@@ -4,14 +4,14 @@
 namespace
 {
 
-constexpr auto ToTriple(QVector3D *v) -> triple<float>
+constexpr auto ToTriple(QVector3D v) -> triple<float>
 {
-    return std::make_tuple( v->x(), v->y(), v->z() );
+    return std::make_tuple( v.x(), v.y(), v.z() );
 }
 
-inline auto ToQuaternionf(QQuaternion *q) -> Quaternionf
+inline auto ToQuaternionf(QQuaternion q) -> Quaternionf
 {
-    return Quaternionf(q->scalar(), q->x(), q->y(), q->z());
+    return Quaternionf(q.scalar(), q.x(), q.y(), q.z());
 }
 
 }
@@ -22,11 +22,32 @@ QDualQuaternion::QDualQuaternion(QObject *parent)
     , _dq{ Quaternionf::unit(), Quaternionf::zero() }
     , _real{ _dq.real.real(), _dq.real.i(), _dq.real.j(), _dq.real.k() }
     , _dual{ _dq.dual.real(), _dq.dual.i(), _dq.dual.j(), _dq.dual.k() }
+    , _translation{ 0, 0, 0 }
 {
     extractTranslation(_dq);
 }
 
-void QDualQuaternion::setRotation(QQuaternion *r)
+QQuaternion QDualQuaternion::real()
+{
+    return _real;
+}
+
+QQuaternion QDualQuaternion::dual()
+{
+    return _dual;
+}
+
+QQuaternion QDualQuaternion::rotation()
+{
+    return real();
+}
+
+QVector3D QDualQuaternion::translation()
+{
+    return _translation;
+}
+
+void QDualQuaternion::setRotation(QQuaternion r)
 {
     // Transform it into the form needed in the dual part...
     DualQuaternionf new_object = make_coordinate_system( ToQuaternionf(r), _dq.dual.imaginary() ); // Use the existing translation
@@ -34,7 +55,7 @@ void QDualQuaternion::setRotation(QQuaternion *r)
     setDualQuaternionf(new_object);
 }
 
-void QDualQuaternion::setTranslation(QVector3D *t)
+void QDualQuaternion::setTranslation(QVector3D t)
 {
     // Transform it into the form needed in the dual part...
     DualQuaternionf new_object = make_coordinate_system(_dq.real, ToTriple(t)); // Use the existing rotation
@@ -74,7 +95,7 @@ void QDualQuaternion::extractParts(const DualQuaternionf &dq)
     _dual.setZ( dq.dual.k() );
 }
 
-void QDualQuaternion::set_coordinate_system(QQuaternion *rotation, QVector3D *translation)
+void QDualQuaternion::set_coordinate_system(QQuaternion rotation, QVector3D translation)
 {
     DualQuaternionf coord_sys = ::make_coordinate_system( ToQuaternionf(rotation), ToTriple(translation) );
 

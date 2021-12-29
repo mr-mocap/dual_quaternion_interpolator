@@ -7,37 +7,35 @@
 #include <QtQml/qqml.h>
 #include "math/DualQuaternion.h"
 
+
 class QDualQuaternion : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( QQuaternion *real READ real NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion *dual READ dual NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion *rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
-    Q_PROPERTY( QVector3D   *translation READ translation WRITE setTranslation NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion real READ real NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion dual READ dual NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   translation READ translation WRITE setTranslation NOTIFY valueChanged )
 
     QML_ELEMENT
 public:
     explicit QDualQuaternion( QObject* parent = nullptr );
 
-    QQuaternion *real() { return &_real; }
-    QQuaternion *dual() { return &_dual; }
+    QQuaternion real();
+    QQuaternion dual();
 
-    QQuaternion *rotation() { return real(); }
-    QVector3D   *translation()
-    {
-        return &_translation;
-    }
+    QQuaternion rotation();
+    QVector3D   translation();
 
-    void setRotation(QQuaternion *r);
-    void setTranslation(QVector3D *t);
+    void setRotation(QQuaternion r);
+    void setTranslation(QVector3D t);
 
     // Allows for getting/setting the underlying object
     const DualQuaternionf &dualQuaternionf() const { return _dq; };
     void setDualQuaternionf(const DualQuaternionf &dq);
 
 public slots:
-    void set_coordinate_system(QQuaternion *rotation, QVector3D *translation);
+    void set_coordinate_system(QQuaternion rotation, QVector3D translation);
 
 signals:
     void valueChanged();
