@@ -3,8 +3,10 @@
 
 #include <QObject>
 #include <QPointer>
-#include "math/Qt/QDualQuaternion.h"
+#include <QQuaternion>
+#include <QtQml/qqml.h>
 
+class QDualQuaternion;
 
 class QDualQuaternionInterpolator : public QObject
 {
@@ -18,16 +20,19 @@ class QDualQuaternionInterpolator : public QObject
 public:
     explicit QDualQuaternionInterpolator(QObject *parent = nullptr);
 
-    QDualQuaternion *first() { return _first; }
-    QDualQuaternion *second() { return _second; }
-    QDualQuaternion *result() { return _result; }
-    float fraction() const { return _t; }
+    QDualQuaternion *first();
+    QDualQuaternion *second();
+    QDualQuaternion *result();
+    float fraction() const;
 
     void setFirst(QDualQuaternion *dq);
     void setSecond(QDualQuaternion *dq);
     void setFraction(const float t);
 signals:
     void valueChanged();
+
+public slots:
+    QQuaternion quaternion_from_axis_and_angle(QVector3D axis, float angle_degrees);
 
 protected:
     QPointer<QDualQuaternion> _first;
@@ -36,6 +41,9 @@ protected:
     float _t = 0.0f;
 
     void set_interpolated_value(const QDualQuaternion &initial, const QDualQuaternion &final, const float t);
+
+protected slots:
+    void onDualQuaternionValueChanged();
 };
 
 #endif // QDUALQUATERNIONINTERPOLATOR_H

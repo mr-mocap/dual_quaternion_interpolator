@@ -1,10 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Scene3D 2.12
-import QtQuick3D 1.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QtQuick3D.Helpers 1.15
 import MathLib.Qt 1.0
 
 Window {
@@ -15,15 +13,14 @@ Window {
     visible: true
     title: qsTr("Dual Quaternion Interpolator")
 
-    Component.onCompleted: {
-        dq_interpolator.first.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 0),
-                                                     Qt.vector3d(0, 0, 0))
-        dq_interpolator.second.set_coordinate_system( Quaternion.fromAxisAndAngle( Qt.vector3d(0, 1, 0), 90),
-                                                      Qt.vector3d(0, 1 * 20, 0))
-    }
-
     QDualQuaternionInterpolator {
         id: dq_interpolator
+
+        first.rotation: quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 0)
+        first.translation: Qt.vector3d(0, 0, 0)
+
+        second.rotation: quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90)
+        second.translation: Qt.vector3d(0, 20, 0)
 
         fraction: interpolation_slider.position
     }
@@ -50,7 +47,7 @@ Window {
                 DualQuaternionView {
                     id: initial_dualquaternionview
 
-                    model: dq_interpolator.first
+                    value: dq_interpolator.first
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -59,7 +56,7 @@ Window {
                 DualQuaternionView {
                     id: interpolated_dualquaternionview
 
-                    model: dq_interpolator.result
+                    value: dq_interpolator.result
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -68,7 +65,7 @@ Window {
                 DualQuaternionView {
                     id: final_dualquaternionview
 
-                    model: dq_interpolator.second
+                    value: dq_interpolator.second
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true

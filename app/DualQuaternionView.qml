@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QtQuick3D 1.15
 import MathLib.Qt 1.0
 
 Rectangle {
@@ -9,8 +8,7 @@ Rectangle {
     border.width: 1
     border.color: "black"
 
-    property QDualQuaternion model: QDualQuaternion {
-    }
+    property QDualQuaternion value;
 
     ColumnLayout {
         id: main_columnlayout
@@ -35,7 +33,7 @@ Rectangle {
             QuaternionView {
                 id: rotation_view
 
-                value: base.model.real
+                value: base.value.real
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -59,7 +57,7 @@ Rectangle {
             QuaternionView {
                 id: translation_view
 
-                value: base.model.dual
+                value: base.value.dual
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true

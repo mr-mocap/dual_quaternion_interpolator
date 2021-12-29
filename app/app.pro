@@ -20,6 +20,7 @@ RESOURCES += qml.qrc
 
 QML_IMPORT_NAME = MathLib.Qt
 QML_IMPORT_MAJOR_VERSION = 1
+QML_IMPORT_MINOR_VERSION = 0
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
