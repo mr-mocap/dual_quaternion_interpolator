@@ -4,5 +4,6 @@
         <file>AxesEntity.qml</file>
         <file>DualQuaternionView.qml</file>
         <file>QuaternionView.qml</file>
+        <file>Vector3DView.qml</file>
     </qresource>
 </RCC>

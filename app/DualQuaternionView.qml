@@ -17,23 +17,47 @@ Rectangle {
         anchors.fill: parent
 
         RowLayout {
-            id: rotation_rowlayout
+            id: real_rowlayout
             spacing: 20
 
             Layout.fillWidth: true
             Layout.fillHeight: true
 
             Label {
-                text: "Rotation"
+                text: "Real"
 
                 Layout.fillWidth: false
                 Layout.fillHeight: true
             }
 
             QuaternionView {
-                id: rotation_view
+                id: real_view
 
                 value: base.value.real
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
+
+        RowLayout {
+            id: dual_rowlayout
+            spacing: 20
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Label {
+                text: "Dual"
+
+                Layout.fillWidth: false
+                Layout.fillHeight: true
+            }
+
+            QuaternionView {
+                id: dual_view
+
+                value: base.value.dual
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -54,10 +78,10 @@ Rectangle {
                 Layout.fillHeight: true
             }
 
-            QuaternionView {
+            Vector3DView {
                 id: translation_view
 
-                value: base.value.dual
+                value: base.value.translation
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
