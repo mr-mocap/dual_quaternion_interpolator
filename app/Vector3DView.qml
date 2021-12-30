@@ -3,37 +3,31 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQml 2.15
 
-Item {
+
+RowLayout {
+    id: rowlayout
+    spacing: 20
+
     property vector3d value;
 
-    RowLayout {
-       id: rowlayout
-       spacing: 20
+    Text {
+        id: x_text
+        text: value.x.toFixed(3)
 
-       anchors.fill: parent
+        Layout.fillWidth: true
+    }
 
-       Text {
-           id: x_text
-           text: value.x.toFixed(3)
+    Text {
+        id: y_text
+        text: value.y.toFixed(3)
 
-           Layout.fillWidth: true
-           Layout.fillHeight: true
-       }
+        Layout.fillWidth: true
+    }
 
-       Text {
-           id: y_text
-           text: value.y.toFixed(3)
+    Text {
+        id: z_text
+        text: value.z.toFixed(3)
 
-           Layout.fillWidth: true
-           Layout.fillHeight: true
-       }
-
-       Text {
-           id: z_text
-           text: value.z.toFixed(3)
-
-           Layout.fillWidth: true
-           Layout.fillHeight: true
-       }
+        Layout.fillWidth: true
     }
 }

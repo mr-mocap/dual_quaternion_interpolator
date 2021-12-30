@@ -7,6 +7,7 @@ Rectangle {
     id: base
     border.width: 1
     border.color: "black"
+    anchors.margins: 20
 
     property QDualQuaternion value;
 
@@ -21,13 +22,11 @@ Rectangle {
             spacing: 20
 
             Layout.fillWidth: true
-            Layout.fillHeight: true
 
-            Label {
+            Text {
                 text: "Real"
 
                 Layout.fillWidth: false
-                Layout.fillHeight: true
             }
 
             QuaternionView {
@@ -36,7 +35,6 @@ Rectangle {
                 value: base.value.real
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
             }
         }
 
@@ -45,13 +43,11 @@ Rectangle {
             spacing: 20
 
             Layout.fillWidth: true
-            Layout.fillHeight: true
 
-            Label {
+            Text {
                 text: "Dual"
 
                 Layout.fillWidth: false
-                Layout.fillHeight: true
             }
 
             QuaternionView {
@@ -60,7 +56,6 @@ Rectangle {
                 value: base.value.dual
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
             }
         }
 
@@ -69,13 +64,11 @@ Rectangle {
             spacing: 20
 
             Layout.fillWidth: true
-            Layout.fillHeight: true
 
-            Label {
+            Text {
                 text: "Translation"
 
                 Layout.fillWidth: false
-                Layout.fillHeight: true
             }
 
             Vector3DView {
@@ -84,7 +77,6 @@ Rectangle {
                 value: base.value.translation
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
             }
         }
     }
