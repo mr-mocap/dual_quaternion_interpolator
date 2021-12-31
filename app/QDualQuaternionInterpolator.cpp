@@ -1,5 +1,6 @@
 #include "QDualQuaternionInterpolator.h"
 #include "math/Qt/QDualQuaternion.h"
+#include "utility.h"
 
 
 QDualQuaternionInterpolator::QDualQuaternionInterpolator(QObject *parent)

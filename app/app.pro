@@ -50,7 +50,8 @@ DISTFILES += \
 
 HEADERS += \
     include/math/Qt/QDualQuaternion.h \
-    include/math/Qt/QDualQuaternionInterpolator.h
+    include/math/Qt/QDualQuaternionInterpolator.h \
+    utility.h
 
 INCLUDEPATH *= ./include
 INCLUDEPATH *= ./include/math

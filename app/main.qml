@@ -15,14 +15,12 @@ Window {
 
     QDualQuaternionInterpolator {
         id: dq_interpolator
-
-        first.rotation: quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 0)
-        first.translation: Qt.vector3d(0, 0, 0)
-
-        second.rotation: quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90)
-        second.translation: Qt.vector3d(0, 20, 0)
-
         fraction: interpolation_slider.position
+
+        Component.onCompleted: {
+          first.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 0), Qt.vector3d(0, 0, 0) )
+          second.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90), Qt.vector3d(0, 20, 0) )
+        }
     }
 
     Item {
