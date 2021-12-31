@@ -12,6 +12,7 @@ RowLayout {
     Text {
         id: scalar_text
         text: value.scalar.toFixed(3)
+        horizontalAlignment: Text.AlignRight
 
         Layout.fillWidth: true
     }
@@ -19,6 +20,7 @@ RowLayout {
     Text {
         id: x_text
         text: value.x.toFixed(3)
+        horizontalAlignment: Text.AlignRight
 
         Layout.fillWidth: true
     }
@@ -26,6 +28,7 @@ RowLayout {
     Text {
         id: y_text
         text: value.y.toFixed(3)
+        horizontalAlignment: Text.AlignRight
 
         Layout.fillWidth: true
     }
@@ -33,6 +36,7 @@ RowLayout {
     Text {
         id: z_text
         text: value.z.toFixed(3)
+        horizontalAlignment: Text.AlignRight
 
         Layout.fillWidth: true
     }

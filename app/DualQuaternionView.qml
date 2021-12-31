@@ -7,77 +7,46 @@ Rectangle {
     id: base
     border.width: 1
     border.color: "black"
-    anchors.margins: 20
 
     property QDualQuaternion value;
 
-    ColumnLayout {
-        id: main_columnlayout
-        spacing: 20
+    Grid {
+        id: grid
+        columns: 2
+        rows: 3
+        spacing: 10
 
         anchors.fill: parent
+        anchors.margins: 10
 
-        RowLayout {
-            id: real_rowlayout
-            spacing: 20
-
-            Layout.fillWidth: true
-
-            Text {
-                text: "Real"
-
-                Layout.fillWidth: false
-            }
-
-            QuaternionView {
-                id: real_view
-
-                value: base.value.real
-
-                Layout.fillWidth: true
-            }
+        Text {
+            text: "Real"
         }
 
-        RowLayout {
-            id: dual_rowlayout
-            spacing: 20
+        QuaternionView {
+            id: real_view
 
-            Layout.fillWidth: true
-
-            Text {
-                text: "Dual"
-
-                Layout.fillWidth: false
-            }
-
-            QuaternionView {
-                id: dual_view
-
-                value: base.value.dual
-
-                Layout.fillWidth: true
-            }
+            value: base.value.real
         }
 
-        RowLayout {
-            id: translation_rowlayout
-            spacing: 20
+        Text {
+            text: "Dual"
+        }
 
-            Layout.fillWidth: true
+        QuaternionView {
+            id: dual_view
 
-            Text {
-                text: "Translation"
+            value: base.value.dual
+        }
 
-                Layout.fillWidth: false
-            }
+        Text {
+            text: "Translation"
+        }
 
-            Vector3DView {
-                id: translation_view
+        Vector3DView {
+            id: translation_view
 
-                value: base.value.translation
-
-                Layout.fillWidth: true
-            }
+            value: base.value.translation
         }
     }
 }
