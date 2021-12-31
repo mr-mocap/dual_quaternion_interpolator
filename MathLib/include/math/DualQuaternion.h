@@ -22,8 +22,8 @@ constexpr DualQuaternion<T> make_dualquaternion_translation(triple<T> translatio
 
     return DualQuaternion<T>{ Quaternion<T>::unit(),
                               make_pure_quaternion( triple<T>{ std::get<0>(translation) / T{2},
-                                                                         std::get<1>(translation) / T{2},
-                                                                         std::get<2>(translation) / T{2} } )
+                                                               std::get<1>(translation) / T{2},
+                                                               std::get<2>(translation) / T{2} } )
                             };
 }
 
