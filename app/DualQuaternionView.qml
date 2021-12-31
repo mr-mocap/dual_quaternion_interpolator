@@ -13,7 +13,7 @@ Rectangle {
     Grid {
         id: grid
         columns: 2
-        rows: 3
+        rows: 5
         spacing: 10
 
         anchors.fill: parent
@@ -47,6 +47,26 @@ Rectangle {
             id: translation_view
 
             value: base.value.translation
+        }
+
+        Text {
+            text: "Rotation Axes"
+        }
+
+        Vector3DView {
+            id: rotation_axes_view
+
+            value: base.value.rotationaxes
+        }
+
+        Text {
+            text: "Rotation Angle"
+        }
+
+        Text {
+            id: rotation_angle_view
+
+            text: base.value.rotationangle.toFixed(3)
         }
     }
 }

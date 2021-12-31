@@ -3,10 +3,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQml 2.15
 
-RowLayout {
+Grid {
     property quaternion value: Qt.quaternion(1.0, 0.0, 0.0, 0.0)
 
     id: values_rowlayout
+    rows: 1
+    columns: 4
     spacing: 20
 
     Text {

@@ -4,9 +4,11 @@ import QtQuick.Layouts 1.15
 import QtQml 2.15
 
 
-RowLayout {
+Grid {
     id: rowlayout
     spacing: 20
+    rows: 1
+    columns: 3
 
     property vector3d value;
 

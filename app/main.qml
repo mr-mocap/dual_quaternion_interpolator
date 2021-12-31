@@ -97,50 +97,32 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-//                Scene3D {
-//                    id: scene
-//                    anchors.fill: parent
-//                    anchors.margins: 10
-//                    focus: true
-//                    aspects: [ "input", "logic" ]
-//                    cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
+                Scene3D {
+                    id: scene
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    focus: true
+                    aspects: [ "input", "logic" ]
+                    cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
 
-//                    AxesEntity {
-//                        id: origin_axes
+                    AxesEntity {
+                        id: origin_axes
 
-//                        position: initial_dualquaternionview.model.translation
-//                    }
-//                    AxisHelper {
-//                        id: origin_axes
-//                        enableAxisLines: true
-//                        position: initial_dualquaternionview.model.translation
-//                        rotation: initial_dualquaternionview.model.rotation
-//                    }
+                        position: dq_interpolator.first.translation
+                    }
 
-//                    AxesEntity {
-//                        id: interpolated_axes
+                    AxesEntity {
+                        id: interpolated_axes
 
-//                        position: interpolated_dualquaternionview.model.translation
-//                    }
-//                    AxisHelper {
-//                        id: interpolated_axes
-//                        enableAxisLines: true
-//                        position: interpolated_dualquaternionview.model.translation
-//                        rotation: interpolated_dualquaternionview.model.rotation
-//                    }
+                        position: dq_interpolator.result.translation
+                    }
 
-//                    AxesEntity {
-//                        id: destination_axes
+                    AxesEntity {
+                        id: destination_axes
 
-//                        position: final_dualquaternionview.model.translation
-//                    }
-//                    AxisHelper {
-//                        id: destination_axes
-//                        enableAxisLines: true
-//                        position: final_dualquaternionview.model.translation
-//                        rotation: final_dualquaternionview.model.rotation
-//                    }
-//                }
+                        position: dq_interpolator.second.translation
+                    }
+                }
             }
         }
     }

@@ -12,24 +12,42 @@ QDualQuaternion::QDualQuaternion(QObject *parent)
     extractTranslation(_dq);
 }
 
-QQuaternion QDualQuaternion::real()
+QQuaternion QDualQuaternion::real() const
 {
     return _real;
 }
 
-QQuaternion QDualQuaternion::dual()
+QQuaternion QDualQuaternion::dual() const
 {
     return _dual;
 }
 
-QQuaternion QDualQuaternion::rotation()
+QQuaternion QDualQuaternion::rotation() const
 {
     return real();
 }
 
-QVector3D QDualQuaternion::translation()
+QVector3D QDualQuaternion::translation() const
 {
     return _translation;
+}
+
+QVector3D QDualQuaternion::rotationAxes() const
+{
+    QVector3D axis;
+    float     angle;
+
+    rotation().getAxisAndAngle(&axis, &angle);
+    return axis;
+}
+
+float QDualQuaternion::rotationAngle() const
+{
+    QVector3D axis;
+    float     angle;
+
+    rotation().getAxisAndAngle(&axis, &angle);
+    return angle;
 }
 
 void QDualQuaternion::setRotation(QQuaternion r)

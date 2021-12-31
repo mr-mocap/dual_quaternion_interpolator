@@ -14,18 +14,22 @@ class QDualQuaternion : public QObject
 
     Q_PROPERTY( QQuaternion real READ real NOTIFY valueChanged )
     Q_PROPERTY( QQuaternion dual READ dual NOTIFY valueChanged )
-    Q_PROPERTY( QQuaternion rotation    READ rotation    WRITE setRotation    NOTIFY valueChanged )
-    Q_PROPERTY( QVector3D   translation READ translation WRITE setTranslation NOTIFY valueChanged )
+    Q_PROPERTY( QQuaternion rotation      READ rotation     WRITE setRotation    NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   translation   READ translation  WRITE setTranslation NOTIFY valueChanged )
+    Q_PROPERTY( QVector3D   rotationaxes  READ rotationAxes                      NOTIFY valueChanged )
+    Q_PROPERTY( float       rotationangle READ rotationAngle                     NOTIFY valueChanged )
 
     QML_ELEMENT
 public:
     explicit QDualQuaternion( QObject* parent = nullptr );
 
-    QQuaternion real();
-    QQuaternion dual();
+    QQuaternion real() const;
+    QQuaternion dual() const;
 
-    QQuaternion rotation();
-    QVector3D   translation();
+    QQuaternion rotation() const;
+    QVector3D   translation() const;
+    QVector3D   rotationAxes() const;
+    float       rotationAngle() const;
 
     void setRotation(QQuaternion r);
     void setTranslation(QVector3D t);

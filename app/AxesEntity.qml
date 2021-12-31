@@ -56,85 +56,85 @@ import Qt3D.Extras 2.15
 
 
 Entity {
-  id: sceneRoot
-  //property RenderCapabilities capabilities : renderSettings.renderCapabilities
-  property vector3d position: Qt.vector3d(0, 0, 0)
+    id: sceneRoot
+    //property RenderCapabilities capabilities : renderSettings.renderCapabilities
+    property vector3d position: Qt.vector3d(0, 0, 0)
 
-  //property QDualQuaternion coord_system
+    //property QDualQuaternion coord_system
 
-  Camera {
-      id: camera
-      projectionType: CameraLens.PerspectiveProjection
-      fieldOfView: 45
-      nearPlane : 0.1
-      farPlane : 1000.0
-      position: Qt.vector3d( 0.0, 0.0, 40.0 )
-      upVector: Qt.vector3d( 0.0, 1.0, 0.0 )
-      viewCenter: Qt.vector3d( 0.0, 0.0, 0.0 )
-  }
-
-  FirstPersonCameraController { camera: camera }
-
-  components: [
-      RenderSettings {
-	  id: renderSettings
-	  activeFrameGraph: ForwardRenderer {
-	      camera: camera
-	      clearColor: "transparent"
-	  }
-      },
-      InputSettings { }
-  ]
-
-  PhongMaterial {
-    id: material
-  }
-
-  property real axis_length: 3
-
-  Entity {
-    Transform {
-	id: transform
-    translation: position
+    Camera {
+        id: camera
+        projectionType: CameraLens.PerspectiveProjection
+        fieldOfView: 45
+        nearPlane : 0.1
+        farPlane : 1000.0
+        position: Qt.vector3d( 0.0, 0.0, 40.0 )
+        upVector: Qt.vector3d( 0.0, 1.0, 0.0 )
+        viewCenter: Qt.vector3d( 0.0, 0.0, 0.0 )
     }
+
+    FirstPersonCameraController { camera: camera }
+
+    components: [
+        RenderSettings {
+            id: renderSettings
+            activeFrameGraph: ForwardRenderer {
+                camera: camera
+                clearColor: "transparent"
+            }
+        },
+        InputSettings { }
+    ]
+
+    PhongMaterial {
+        id: material
+    }
+
+    property real axis_length: 3
+
     Entity {
-	Transform {
-	  id: transform2
-	  translation: Qt.vector3d(0, 1.5, 0)
-	}
-	CylinderMesh {
-	  id: mesh
-	  radius: 0.2
-	  length: axis_length
-	}
-	components: [ material, mesh, transform2 ]
+        Transform {
+            id: transform
+            translation: position
+        }
+        Entity {
+            Transform {
+                id: transform2
+                translation: Qt.vector3d(0, 1.5, 0)
+            }
+            CylinderMesh {
+                id: mesh
+                radius: 0.2
+                length: axis_length
+            }
+            components: [ material, mesh, transform2 ]
+        }
+        Entity {
+            Transform {
+                id: transform3
+                translation: Qt.vector3d(0, 0, 1.5)
+                rotationX: 90
+            }
+            CylinderMesh {
+                id: mesh2
+                radius: 0.2
+                length: axis_length
+            }
+            components: [ material, mesh2, transform3 ]
+        }
+        Entity {
+            Transform {
+                id: transform4
+                translation: Qt.vector3d(1.5, 0, 0)
+                rotationZ: 90
+            }
+            CylinderMesh {
+                id: mesh3
+                radius: 0.2
+                length: axis_length
+            }
+            components: [ material, mesh3, transform4 ]
+        }
+        components: [ transform ]
     }
-    Entity {
-	Transform {
-	  id: transform3
-	  translation: Qt.vector3d(0, 0, 1.5)
-	  rotationX: 90
-	}
-	CylinderMesh {
-	  id: mesh2
-	  radius: 0.2
-	  length: axis_length
-	}
-	components: [ material, mesh2, transform3 ]
-    }
-    Entity {
-	Transform {
-	  id: transform4
-	  translation: Qt.vector3d(1.5, 0, 0)
-	  rotationZ: 90
-	}
-	CylinderMesh {
-	  id: mesh3
-	  radius: 0.2
-	  length: axis_length
-	}
-	components: [ material, mesh3, transform4 ]
-    }
-    components: [ transform ]
-  }
 }
