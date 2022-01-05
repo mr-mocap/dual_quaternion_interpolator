@@ -56,6 +56,7 @@ import Qt3D.Extras 2.15
 
 
 Entity {
+    id: root
     //property RenderCapabilities capabilities : renderSettings.renderCapabilities
     property vector3d position: Qt.vector3d(0, 0, 0)
     property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
@@ -69,6 +70,7 @@ Entity {
         Transform {
             id: transform
             translation: position
+            rotation: root.rotation
         }
         Entity {
             Transform {
