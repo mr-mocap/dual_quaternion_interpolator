@@ -34,22 +34,22 @@ Entity {
         InputSettings { }
     ]
 
-    AxisHelper {
-        id: axishelper
-        gridColor: "white"
-        enableXZGrid: true
-        enableAxisLines: true
+//    AxisHelper {
+//        id: axishelper
+//        gridColor: "white"
+//        enableXZGrid: true
+//        enableAxisLines: true
 
-        PhongMaterial {
-            id: axishelpermaterial
-            diffuse: "steelblue"
-        }
-    }
-
-//    AxesEntity {
-//        id: interpolated_axes
-
-//        position: sceneRoot.position
-//        rotation: sceneRoot.rotation
+//        PhongMaterial {
+//            id: axishelpermaterial
+//            diffuse: "steelblue"
+//        }
 //    }
+
+    AxesEntity {
+        id: interpolated_axes
+
+        position: sceneRoot.position
+        rotation: sceneRoot.rotation
+    }
 }
