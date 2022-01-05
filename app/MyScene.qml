@@ -2,7 +2,7 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.12
 import Qt3D.Input 2.12
 import Qt3D.Extras 2.15
-import QtQuick3D.Helpers 1.15
+//import QtQuick3D.Helpers 1.15
 
 Entity {
     id: sceneRoot
@@ -46,10 +46,10 @@ Entity {
         }
     }
 
-    AxesEntity {
-        id: interpolated_axes
+//    AxesEntity {
+//        id: interpolated_axes
 
-        position: sceneRoot.position
-        rotation: sceneRoot.rotation
-    }
+//        position: sceneRoot.position
+//        rotation: sceneRoot.rotation
+//    }
 }
