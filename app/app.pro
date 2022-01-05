@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += core gui qml quick 3dinput
+QT += core gui qml quick 3dinput 3dextras
 
 CONFIG += c++17
 CONFIG += qmltypes
+CONFIG += resources_big
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -35,7 +36,15 @@ DISTFILES += \
     MyScene.qml \
     Vector3DView.qml \
     QuaternionView.qml \
-    DualQuaternionView.qml
+    DualQuaternionView.qml \
+    main.qml
+
+OTHER_FILES += \
+    MyScene.qml \
+    Vector3DView.qml \
+    QuaternionView.qml \
+    DualQuaternionView.qml \
+    main.qml
 
 HEADERS += \
     include/math/ApproximatelyEqualTo.h \

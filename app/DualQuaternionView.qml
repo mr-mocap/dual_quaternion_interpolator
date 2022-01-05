@@ -24,8 +24,6 @@ Rectangle {
         }
 
         QuaternionView {
-            id: real_view
-
             value: base.value.real
         }
 
@@ -34,8 +32,6 @@ Rectangle {
         }
 
         QuaternionView {
-            id: dual_view
-
             value: base.value.dual
         }
 
@@ -44,8 +40,6 @@ Rectangle {
         }
 
         Vector3DView {
-            id: translation_view
-
             value: base.value.translation
         }
 
@@ -54,8 +48,6 @@ Rectangle {
         }
 
         Vector3DView {
-            id: rotation_axes_view
-
             value: base.value.rotationaxes
         }
 
@@ -64,9 +56,7 @@ Rectangle {
         }
 
         Text {
-            id: rotation_angle_view
-
-            text: base.value.rotationangle.toFixed(3)
+            text: base.value.rotationangle.toFixed(3) + " °"
         }
     }
 }

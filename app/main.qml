@@ -1,5 +1,6 @@
 import QtQuick 2.15
-import QtQuick.Scene3D 2.12
+import QtQuick.Scene3D 2.15
+import Qt3D.Core 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -7,7 +8,7 @@ import MathLib.Qt 1.0
 
 Window {
     width: 900
-    height: 600
+    height: 700
     x: 100
     y: 100
     visible: true
@@ -31,13 +32,13 @@ Window {
 
         ColumnLayout {
             id: main_columnlayout
-            spacing: 20
+            spacing: 10
 
             anchors.fill: parent
 
             RowLayout {
                 id: data_rowlayout
-                spacing: 20
+                spacing: 10
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -93,34 +94,21 @@ Window {
             Rectangle {
                 id: scene_rectangle
                 color: "darkRed"
+                height: 400
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.fillHeight: false
 
                 Scene3D {
-                    id: scene
+                    id: scene3d
                     anchors.fill: parent
-                    anchors.margins: 10
                     focus: true
                     aspects: [ "input", "logic" ]
                     cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
 
-                    AxesEntity {
-                        id: origin_axes
-
-                        position: dq_interpolator.first.translation
-                    }
-
-                    AxesEntity {
-                        id: interpolated_axes
-
+                    MyScene {
                         position: dq_interpolator.result.translation
-                    }
-
-                    AxesEntity {
-                        id: destination_axes
-
-                        position: dq_interpolator.second.translation
+                        rotation: dq_interpolator.result.rotation
                     }
                 }
             }

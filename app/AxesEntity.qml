@@ -56,41 +56,14 @@ import Qt3D.Extras 2.15
 
 
 Entity {
-    id: sceneRoot
     //property RenderCapabilities capabilities : renderSettings.renderCapabilities
     property vector3d position: Qt.vector3d(0, 0, 0)
-
-    //property QDualQuaternion coord_system
-
-    Camera {
-        id: camera
-        projectionType: CameraLens.PerspectiveProjection
-        fieldOfView: 45
-        nearPlane : 0.1
-        farPlane : 1000.0
-        position: Qt.vector3d( 0.0, 0.0, 40.0 )
-        upVector: Qt.vector3d( 0.0, 1.0, 0.0 )
-        viewCenter: Qt.vector3d( 0.0, 0.0, 0.0 )
-    }
-
-    FirstPersonCameraController { camera: camera }
-
-    components: [
-        RenderSettings {
-            id: renderSettings
-            activeFrameGraph: ForwardRenderer {
-                camera: camera
-                clearColor: "transparent"
-            }
-        },
-        InputSettings { }
-    ]
+    property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
+    property real axis_length: 3
 
     PhongMaterial {
         id: material
     }
-
-    property real axis_length: 3
 
     Entity {
         Transform {

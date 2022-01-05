@@ -6,7 +6,7 @@ import QtQml 2.15
 
 Grid {
     id: rowlayout
-    spacing: 20
+    spacing: 10
     rows: 1
     columns: 3
 
