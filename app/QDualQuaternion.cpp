@@ -78,7 +78,8 @@ void QDualQuaternion::setDualQuaternionf(const DualQuaternionf &dq)
 
 void QDualQuaternion::extractTranslation(const DualQuaternionf &dq)
 {
-    Quaternionf result { 2.0f * dq.dual * dq.real.inverse() };
+    Quaternionf two_dq = 2.0f * dq.dual;
+    Quaternionf result = two_dq * dq.real.inverse();
 
     _translation.setX( result.i() );
     _translation.setY( result.j() );
