@@ -54,6 +54,7 @@ HEADERS += \
     include/math/Quaternion.h \
     include/math/Qt/QDualQuaternion.h \
     include/math/Qt/QDualQuaternionInterpolator.h \
+    include/math/types.h \
     utility.h
 
 INCLUDEPATH *= ./include
