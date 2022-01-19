@@ -90,6 +90,24 @@ constexpr DualQuaternion<T> normalized(DualQuaternion<T> d)
     return d / dualquaternion_norm(d);
 }
 
+template<class T>
+constexpr bool unit_dualquaternion_rotation_magnitude_is_one(DualQuaternion<T> d)
+{
+    return approximately_equal_to( dot(d.real, d.real), 1 );
+}
+
+template<class T>
+constexpr bool unit_dualquaternion_rotation_and_translation_are_orthogonal(DualQuaternion<T> d)
+{
+    return approximately_equal_to( dot(d.real, d.dual), 0);
+}
+
+template<class T>
+constexpr bool is_unit(DualQuaternion<T> d)
+{
+    return unit_dualquaternion_rotation_magnitude_is_one(d) && unit_dualquaternion_rotation_and_translation_are_orthogonal(d);
+}
+
 using DualQuaternionf = DualQuaternion<float>;
 using DualQuaterniond = DualQuaternion<double>;
 using DualQuaternionld = DualQuaternion<long double>;

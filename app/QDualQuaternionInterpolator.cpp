@@ -82,7 +82,7 @@ void QDualQuaternionInterpolator::set_interpolated_value( const QDualQuaternion 
     if ( t >= 0.0 && t <= 1.0 ) {
         DualQuaternionf interpolated = initial.dualQuaternionf() + ( final.dualQuaternionf() - initial.dualQuaternionf() ) * t ;
 
-        _result->setDualQuaternionf(interpolated);
+        _result->setDualQuaternionf( normalized(interpolated) );
         //emit valueChanged();
     }
 }
