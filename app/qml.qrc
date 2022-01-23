@@ -6,5 +6,6 @@
         <file>QuaternionView.qml</file>
         <file>Vector3DView.qml</file>
         <file>MyScene.qml</file>
+        <file>PlaneEntity.qml</file>
     </qresource>
 </RCC>

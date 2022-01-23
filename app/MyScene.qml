@@ -2,7 +2,7 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.12
 import Qt3D.Input 2.12
 import Qt3D.Extras 2.15
-//import QtQuick3D.Helpers 1.15
+//import QtQuick3D 1.15
 
 Entity {
     id: sceneRoot
@@ -34,17 +34,9 @@ Entity {
         InputSettings { }
     ]
 
-//    AxisHelper {
-//        id: axishelper
-//        gridColor: "white"
-//        enableXZGrid: true
-//        enableAxisLines: true
-
-//        PhongMaterial {
-//            id: axishelpermaterial
-//            diffuse: "steelblue"
-//        }
-//    }
+    PlaneEntity {
+        id: plane_entity
+    }
 
     AxesEntity {
         id: interpolated_axes

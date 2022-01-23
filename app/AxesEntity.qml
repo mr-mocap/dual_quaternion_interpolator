@@ -60,10 +60,24 @@ Entity {
     //property RenderCapabilities capabilities : renderSettings.renderCapabilities
     property vector3d position: Qt.vector3d(0, 0, 0)
     property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
-    property real axis_length: 3
+    property real axis_length: 8
 
-    PhongMaterial {
-        id: material
+    GoochMaterial {
+        id: red_material
+
+        diffuse: "red"
+    }
+
+    GoochMaterial {
+        id: green_material
+
+        diffuse: "green"
+    }
+
+    GoochMaterial {
+        id: blue_material
+
+        diffuse: "blue"
     }
 
     Entity {
@@ -75,19 +89,19 @@ Entity {
         Entity {
             Transform {
                 id: transform2
-                translation: Qt.vector3d(0, 1.5, 0)
+                translation: Qt.vector3d(0, axis_length / 2.0, 0)
             }
             CylinderMesh {
                 id: mesh
                 radius: 0.2
                 length: axis_length
             }
-            components: [ material, mesh, transform2 ]
+            components: [ green_material, mesh, transform2 ]
         }
         Entity {
             Transform {
                 id: transform3
-                translation: Qt.vector3d(0, 0, 1.5)
+                translation: Qt.vector3d(0, 0, axis_length / 2.0)
                 rotationX: 90
             }
             CylinderMesh {
@@ -95,12 +109,12 @@ Entity {
                 radius: 0.2
                 length: axis_length
             }
-            components: [ material, mesh2, transform3 ]
+            components: [ blue_material, mesh2, transform3 ]
         }
         Entity {
             Transform {
                 id: transform4
-                translation: Qt.vector3d(1.5, 0, 0)
+                translation: Qt.vector3d(axis_length / 2.0, 0, 0)
                 rotationZ: 90
             }
             CylinderMesh {
@@ -108,7 +122,7 @@ Entity {
                 radius: 0.2
                 length: axis_length
             }
-            components: [ material, mesh3, transform4 ]
+            components: [ red_material, mesh3, transform4 ]
         }
         components: [ transform ]
     }

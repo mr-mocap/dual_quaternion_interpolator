@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += core gui qml quick 3dinput 3dextras
+QT += core gui 3dcore 3drender 3dinput 3dquick qml quick 3dextras 3dquickextras
 
 CONFIG += c++17
 CONFIG += qmltypes
@@ -34,6 +34,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     MyScene.qml \
+    PlaneEntity.qml \
+    SimpleMaterial.qml \
     Vector3DView.qml \
     QuaternionView.qml \
     DualQuaternionView.qml \
