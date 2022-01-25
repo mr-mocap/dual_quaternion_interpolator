@@ -10,11 +10,16 @@ Rectangle {
 
     property QDualQuaternion value;
 
+    implicitHeight: grid.implicitHeight + grid.rowSpacing * grid.rows - 1
+    implicitWidth: grid.implicitWidth + grid.columnSpacing * grid.columns - 1
+
     Grid {
         id: grid
         columns: 2
         rows: 5
-        spacing: 10
+        rowSpacing: 5
+        columnSpacing: 10
+        padding: 0
 
         anchors.fill: parent
         anchors.margins: 10

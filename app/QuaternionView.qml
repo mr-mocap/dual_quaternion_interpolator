@@ -9,7 +9,8 @@ Grid {
     id: values_rowlayout
     rows: 1
     columns: 4
-    spacing: 10
+    columnSpacing: 10
+    padding: 0
 
     Text {
         id: scalar_text

@@ -72,3 +72,5 @@ INCLUDEPATH *= ./include/math/Qt
 
 qml.files = *.qml
 qml.path = $$DESTPATH
+
+FORMS +=

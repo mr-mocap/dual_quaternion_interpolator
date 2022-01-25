@@ -32,7 +32,7 @@ Window {
 
         ColumnLayout {
             id: main_columnlayout
-            spacing: 10
+            spacing: 5
 
             anchors.fill: parent
 
@@ -41,7 +41,8 @@ Window {
                 spacing: 10
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.fillHeight: false
+                Layout.maximumHeight: initial_dualquaternionview.implicitHeight
 
                 DualQuaternionView {
                     id: initial_dualquaternionview
@@ -49,7 +50,6 @@ Window {
                     value: dq_interpolator.first
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
                 }
 
                 DualQuaternionView {
@@ -58,7 +58,6 @@ Window {
                     value: dq_interpolator.result
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
                 }
 
                 DualQuaternionView {
@@ -67,7 +66,6 @@ Window {
                     value: dq_interpolator.second
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
                 }
             }
 
@@ -77,27 +75,29 @@ Window {
                 to: 100
                 live: true
                 orientation: Qt.Horizontal
+                padding: 0
 
                 Layout.fillWidth: true
-                Layout.fillHeight: false
+                Layout.maximumHeight: implicitHeight
             }
 
             Label {
                 id: slidervalue_label
                 text: interpolation_slider.value.toFixed(2) + "%"
                 horizontalAlignment: Text.AlignHCenter
+                padding: 0
 
                 Layout.fillWidth: true
-                Layout.fillHeight: false
+                Layout.maximumHeight: implicitHeight
             }
 
             Rectangle {
                 id: scene_rectangle
                 color: "lightGrey"
-                height: 400
+                //height: 400
 
                 Layout.fillWidth: true
-                Layout.fillHeight: false
+                Layout.fillHeight: true
 
                 Scene3D {
                     id: scene3d
