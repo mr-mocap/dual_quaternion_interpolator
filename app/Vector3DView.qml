@@ -6,9 +6,10 @@ import QtQml 2.15
 
 Grid {
     id: rowlayout
-    spacing: 10
+    columnSpacing: 10
     rows: 1
     columns: 3
+    padding: 0
 
     property vector3d value;
 

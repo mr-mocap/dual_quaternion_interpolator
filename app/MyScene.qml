@@ -7,8 +7,14 @@ import QtQuick 2.1 as QQ2
 Entity {
     id: sceneRoot
 
-    property alias position: interpolated_axes.position
-    property alias rotation: interpolated_axes.rotation
+    property alias initialPosition: initial_axes.position
+    property alias initialRotation: initial_axes.rotation
+
+    property alias interpolatedPosition: interpolated_axes.position
+    property alias interpolatedRotation: interpolated_axes.rotation
+
+    property alias finalPosition: final_axes.position
+    property alias finalRotation: final_axes.rotation
 
     Camera {
         id: camera
@@ -70,9 +76,23 @@ Entity {
     }
 
     AxesEntity {
+        id: initial_axes
+
+        position: sceneRoot.initialPosition
+        rotation: sceneRoot.initialRotation
+    }
+
+    AxesEntity {
         id: interpolated_axes
 
-        position: sceneRoot.position
-        rotation: sceneRoot.rotation
+        position: sceneRoot.interpolatedPosition
+        rotation: sceneRoot.interpolatedRotation
+    }
+
+    AxesEntity {
+        id: final_axes
+
+        position: sceneRoot.finalPosition
+        rotation: sceneRoot.finalRotation
     }
 }

@@ -57,7 +57,7 @@ import Qt3D.Extras 2.15
 
 Entity {
     id: root
-    //property RenderCapabilities capabilities : renderSettings.renderCapabilities
+
     property vector3d position: Qt.vector3d(0, 0, 0)
     property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
     property real axis_length: 8
@@ -70,6 +70,7 @@ Entity {
         diffuse: Qt.rgba( 0.8, 0.0, 0.0, 1.0 )
         lineColor: diffuse
     }
+
     WireframeMaterial {
         id: wireframeMaterial_green
         effect: WireframeEffect {}
@@ -77,6 +78,7 @@ Entity {
         diffuse: Qt.rgba( 0.0, 0.8, 0.0, 1.0 )
         lineColor: diffuse
     }
+
     WireframeMaterial {
         id: wireframeMaterial_blue
         effect: WireframeEffect {}

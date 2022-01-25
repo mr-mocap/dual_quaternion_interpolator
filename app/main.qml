@@ -18,7 +18,7 @@ Window {
 
         Component.onCompleted: {
           first.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 0), Qt.vector3d(0, 0, 0) )
-          second.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90), Qt.vector3d(0, 20, 0) )
+          second.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90), Qt.vector3d(0, 50, 0) )
         }
     }
 
@@ -104,8 +104,14 @@ Window {
                     cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
 
                     MyScene {
-                        position: dq_interpolator.result.translation
-                        rotation: dq_interpolator.result.rotation
+                        initialPosition: dq_interpolator.first.translation
+                        initialRotation: dq_interpolator.first.rotation
+
+                        interpolatedPosition: dq_interpolator.result.translation
+                        interpolatedRotation: dq_interpolator.result.rotation
+
+                        finalPosition: dq_interpolator.second.translation
+                        finalRotation: dq_interpolator.second.rotation
                     }
                 }
             }
