@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2015 Klaralvdalens Datakonsult AB (KDAB).
+** Copyright (C) 2014 Klaralvdalens Datakonsult AB (KDAB).
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the Qt3D module of the Qt Toolkit.
@@ -48,87 +48,25 @@
 **
 ****************************************************************************/
 
-
 import Qt3D.Core 2.0
-import Qt3D.Render 2.12
-import Qt3D.Input 2.12
-import Qt3D.Extras 2.15
+import Qt3D.Render 2.0
 
-
-Entity {
+Material {
     id: root
-    //property RenderCapabilities capabilities : renderSettings.renderCapabilities
-    property vector3d position: Qt.vector3d(0, 0, 0)
-    property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
-    property real axis_length: 8
-    property real axes_radius: 0.4
 
-    WireframeMaterial {
-        id: wireframeMaterial_red
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.8, 0.0, 0.0, 1.0 )
-        lineColor: diffuse
-    }
-    WireframeMaterial {
-        id: wireframeMaterial_green
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.0, 0.8, 0.0, 1.0 )
-        lineColor: diffuse
-    }
-    WireframeMaterial {
-        id: wireframeMaterial_blue
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.0, 0.0, 0.8, 1.0 )
-        lineColor: diffuse
-    }
+    property color ambient: Qt.rgba( 0.05, 0.05, 0.05, 1.0 )
+    property color diffuse: Qt.rgba( 0.7, 0.7, 0.7, 1.0 )
+    property color specular: Qt.rgba( 0.95, 0.95, 0.95, 1.0 )
+    property real shininess: 150.0
+    property real lineWidth: 0.8
+    property color lineColor: Qt.rgba( 0.0, 0.0, 0.0, 1.0 )
 
-    Entity {
-        Transform {
-            id: transform
-            translation: position
-            rotation: root.rotation
-        }
-        Entity {
-            Transform {
-                id: transform2
-                translation: Qt.vector3d(0, axis_length / 2.0, 0)
-            }
-            CylinderMesh {
-                id: mesh
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_green, mesh, transform2 ]
-        }
-        Entity {
-            Transform {
-                id: transform3
-                translation: Qt.vector3d(0, 0, axis_length / 2.0)
-                rotationX: 90
-            }
-            CylinderMesh {
-                id: mesh2
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_blue, mesh2, transform3 ]
-        }
-        Entity {
-            Transform {
-                id: transform4
-                translation: Qt.vector3d(axis_length / 2.0, 0, 0)
-                rotationZ: 90
-            }
-            CylinderMesh {
-                id: mesh3
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_red, mesh3, transform4 ]
-        }
-        components: [ transform ]
-    }
+    parameters: [
+        Parameter { name: "ka"; value: Qt.vector3d(root.ambient.r, root.ambient.g, root.ambient.b) },
+        Parameter { name: "kd"; value: Qt.vector3d(root.diffuse.r, root.diffuse.g, root.diffuse.b) },
+        Parameter { name: "ksp"; value: Qt.vector3d(root.specular.r, root.specular.g, root.specular.b) },
+        Parameter { name: "shininess"; value: root.shininess },
+        Parameter { name: "line.width"; value: root.lineWidth },
+        Parameter { name: "line.color"; value: root.lineColor }
+    ]
 }

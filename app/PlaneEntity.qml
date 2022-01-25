@@ -5,6 +5,11 @@ import Qt3D.Extras 2.15
 Entity {
     id: root
 
+    property size resolution: Qt.size(20, 20)
+    property real width: 80
+    property real height: 80
+    property Material material
+
     Entity {
         Transform {
             id: plane_transform
@@ -15,15 +20,9 @@ Entity {
         PlaneMesh {
             id: plane_mesh
 
-            height: 100
-            width: 100
-            meshResolution: Qt.size(20, 20)
-        }
-
-        GoochMaterial {
-            id: material
-
-            diffuse: "grey"
+            height: root.height
+            width: root.width
+            meshResolution: root.resolution
         }
 
         components: [ plane_transform, plane_mesh, material ]

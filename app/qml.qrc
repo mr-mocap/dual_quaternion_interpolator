@@ -7,5 +7,7 @@
         <file>Vector3DView.qml</file>
         <file>MyScene.qml</file>
         <file>PlaneEntity.qml</file>
+        <file>WireframeMaterial.qml</file>
+        <file>WireframeEffect.qml</file>
     </qresource>
 </RCC>

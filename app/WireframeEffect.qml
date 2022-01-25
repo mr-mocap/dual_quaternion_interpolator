@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2015 Klaralvdalens Datakonsult AB (KDAB).
+** Copyright (C) 2014 Klaralvdalens Datakonsult AB (KDAB).
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the Qt3D module of the Qt Toolkit.
@@ -48,87 +48,46 @@
 **
 ****************************************************************************/
 
-
 import Qt3D.Core 2.0
-import Qt3D.Render 2.12
-import Qt3D.Input 2.12
-import Qt3D.Extras 2.15
+import Qt3D.Render 2.0
 
-
-Entity {
+Effect {
     id: root
-    //property RenderCapabilities capabilities : renderSettings.renderCapabilities
-    property vector3d position: Qt.vector3d(0, 0, 0)
-    property quaternion rotation: Qt.quaternion(1, 0, 0, 0)
-    property real axis_length: 8
-    property real axes_radius: 0.4
 
-    WireframeMaterial {
-        id: wireframeMaterial_red
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.8, 0.0, 0.0, 1.0 )
-        lineColor: diffuse
-    }
-    WireframeMaterial {
-        id: wireframeMaterial_green
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.0, 0.8, 0.0, 1.0 )
-        lineColor: diffuse
-    }
-    WireframeMaterial {
-        id: wireframeMaterial_blue
-        effect: WireframeEffect {}
-        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
-        diffuse: Qt.rgba( 0.0, 0.0, 0.8, 1.0 )
-        lineColor: diffuse
-    }
+    parameters: [
+        Parameter { name: "ka";   value: Qt.vector3d( 0.1, 0.1, 0.1 ) },
+        Parameter { name: "kd";   value: Qt.vector3d( 0.7, 0.7, 0.7 ) },
+        Parameter { name: "ks";  value: Qt.vector3d( 0.95, 0.95, 0.95 ) },
+        Parameter { name: "shininess"; value: 150.0 }
+    ]
 
-    Entity {
-        Transform {
-            id: transform
-            translation: position
-            rotation: root.rotation
+    techniques: [
+        Technique {
+            graphicsApiFilter {
+                api: GraphicsApiFilter.OpenGL
+                profile: GraphicsApiFilter.CoreProfile
+                majorVersion: 3
+                minorVersion: 1
+            }
+
+            filterKeys: [ FilterKey { name: "renderingStyle"; value: "forward" } ]
+
+            parameters: [
+                Parameter { name: "light.position"; value: Qt.vector4d( 0.0, 0.0, 0.0, 1.0 ) },
+                Parameter { name: "light.intensity"; value: Qt.vector3d( 1.0, 1.0, 1.0 ) },
+                Parameter { name: "line.width"; value: 1.0 },
+                Parameter { name: "line.color"; value: Qt.vector4d( 1.0, 1.0, 1.0, 1.0 ) }
+            ]
+
+            renderPasses: [
+                RenderPass {
+                    shaderProgram: ShaderProgram {
+                        vertexShaderCode:   loadSource("qrc:/shaders/robustwireframe.vert")
+                        geometryShaderCode: loadSource("qrc:/shaders/robustwireframe.geom")
+                        fragmentShaderCode: loadSource("qrc:/shaders/robustwireframe.frag")
+                    }
+                }
+            ]
         }
-        Entity {
-            Transform {
-                id: transform2
-                translation: Qt.vector3d(0, axis_length / 2.0, 0)
-            }
-            CylinderMesh {
-                id: mesh
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_green, mesh, transform2 ]
-        }
-        Entity {
-            Transform {
-                id: transform3
-                translation: Qt.vector3d(0, 0, axis_length / 2.0)
-                rotationX: 90
-            }
-            CylinderMesh {
-                id: mesh2
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_blue, mesh2, transform3 ]
-        }
-        Entity {
-            Transform {
-                id: transform4
-                translation: Qt.vector3d(axis_length / 2.0, 0, 0)
-                rotationZ: 90
-            }
-            CylinderMesh {
-                id: mesh3
-                radius: root.axes_radius
-                length: root.axis_length
-            }
-            components: [ wireframeMaterial_red, mesh3, transform4 ]
-        }
-        components: [ transform ]
-    }
+    ]
 }

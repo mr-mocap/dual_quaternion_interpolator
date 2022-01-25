@@ -15,7 +15,8 @@ SOURCES += \
         QDualQuaternionInterpolator.cpp \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    shaders.qrc
 
 QML_IMPORT_NAME = MathLib.Qt
 QML_IMPORT_MAJOR_VERSION = 1
@@ -36,10 +37,16 @@ DISTFILES += \
     MyScene.qml \
     PlaneEntity.qml \
     SimpleMaterial.qml \
+    SimpleMaterial.qml \
     Vector3DView.qml \
     QuaternionView.qml \
     DualQuaternionView.qml \
-    main.qml
+    WireframeEffect.qml \
+    WireframeMaterial.qml \
+    main.qml \
+    robustwireframe.frag \
+    robustwireframe.geom \
+    robustwireframe.vert
 
 OTHER_FILES += \
     MyScene.qml \
