@@ -94,7 +94,6 @@ Window {
             Rectangle {
                 id: scene_rectangle
                 color: "lightGrey"
-                //height: 400
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
