@@ -9,8 +9,6 @@ import MathLib.Qt 1.0
 Window {
     width: 900
     height: 700
-    x: 100
-    y: 100
     visible: true
     title: qsTr("Dual Quaternion Interpolator")
 
