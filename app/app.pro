@@ -11,6 +11,7 @@ CONFIG += resources_big
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        QAxisAngle.cpp \
         QDualQuaternion.cpp \
         QDualQuaternionInterpolator.cpp \
         main.cpp
@@ -40,6 +41,7 @@ DISTFILES += \
     SimpleMaterial.qml \
     Vector3DView.qml \
     QuaternionView.qml \
+    QuaternionAxis.qml \
     DualQuaternionView.qml \
     WireframeEffect.qml \
     WireframeMaterial.qml \
@@ -60,6 +62,7 @@ HEADERS += \
     include/math/Conjugate.h \
     include/math/Dual.h \
     include/math/DualQuaternion.h \
+    include/math/Qt/QAxisAngle.h \
     include/math/Quaternion.h \
     include/math/Qt/QDualQuaternion.h \
     include/math/Qt/QDualQuaternionInterpolator.h \

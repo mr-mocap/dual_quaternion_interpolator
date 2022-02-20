@@ -95,7 +95,7 @@ Entity {
         }
         Entity {
             Transform {
-                id: transform2
+                id: transform_y
                 translation: Qt.vector3d(0, axis_length / 2.0, 0)
             }
             CylinderMesh {
@@ -103,11 +103,11 @@ Entity {
                 radius: root.axes_radius
                 length: root.axis_length
             }
-            components: [ wireframeMaterial_green, mesh, transform2 ]
+            components: [ wireframeMaterial_green, mesh, transform_y ]
         }
         Entity {
             Transform {
-                id: transform3
+                id: transform_z
                 translation: Qt.vector3d(0, 0, axis_length / 2.0)
                 rotationX: 90
             }
@@ -116,11 +116,11 @@ Entity {
                 radius: root.axes_radius
                 length: root.axis_length
             }
-            components: [ wireframeMaterial_blue, mesh2, transform3 ]
+            components: [ wireframeMaterial_blue, mesh2, transform_z ]
         }
         Entity {
             Transform {
-                id: transform4
+                id: transform_x
                 translation: Qt.vector3d(axis_length / 2.0, 0, 0)
                 rotationZ: 90
             }
@@ -129,7 +129,7 @@ Entity {
                 radius: root.axes_radius
                 length: root.axis_length
             }
-            components: [ wireframeMaterial_red, mesh3, transform4 ]
+            components: [ wireframeMaterial_red, mesh3, transform_x ]
         }
         components: [ transform ]
     }

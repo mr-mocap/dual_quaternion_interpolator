@@ -9,5 +9,6 @@
         <file>PlaneEntity.qml</file>
         <file>WireframeMaterial.qml</file>
         <file>WireframeEffect.qml</file>
+        <file>QuaternionAxis.qml</file>
     </qresource>
 </RCC>

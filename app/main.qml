@@ -12,13 +12,16 @@ Window {
     visible: true
     title: qsTr("Dual Quaternion Interpolator")
 
+    property vector3d initialAxis: Qt.vector3d(0, 1, 0)
+    property vector3d finalAxis: Qt.vector3d(0, 1, 0)
+
     QDualQuaternionInterpolator {
         id: dq_interpolator
         fraction: interpolation_slider.position
 
         Component.onCompleted: {
-          first.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 0), Qt.vector3d(0, 0, 0) )
-          second.set_coordinate_system( quaternion_from_axis_and_angle( Qt.vector3d(0, 1, 0), 90), Qt.vector3d(0, 50, 0) )
+          first.set_coordinate_system( quaternion_from_axis_and_angle( initialAxis, 0), Qt.vector3d(0, 0, 0) )
+          second.set_coordinate_system( quaternion_from_axis_and_angle( finalAxis, 90), Qt.vector3d(0, 50, 0) )
         }
     }
 
