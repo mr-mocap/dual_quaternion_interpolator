@@ -85,15 +85,16 @@ public:
         const int verticesCount = vertexCount(m_slices);
 
         // vec3 pos, vec2 texCoord, vec3 normal
-        const quint32 vertexSize = (3 + 2 + 3) * sizeof(float);
+        const quint32 numberOfElements = 3 + 2 + 3;
 
-        QByteArray verticesData;
-        verticesData.resize(vertexSize * verticesCount);
-        float *verticesPtr = reinterpret_cast<float*>(verticesData.data());
+        std::vector<float> verticesData;
+
+        verticesData.resize(numberOfElements * verticesCount);
+        float *verticesPtr = verticesData.data();
 
         createDiskVertices(verticesPtr, m_slices);
 
-        return verticesData;
+        return QByteArray(reinterpret_cast<char *>(verticesData.data()), verticesData.size() * sizeof(float));
     }
 
     bool operator ==(const QBufferDataGenerator &other) const override
