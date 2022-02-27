@@ -33,7 +33,7 @@ void createDiskVertices(float *&verticesPtr, int slices)
     *verticesPtr++ = zNormal;
 
 
-    for (int slice = 0; slice <= slices; ++slice)
+    for (int slice = 0; slice < slices; ++slice)
     {
         const float theta = static_cast<float>(slice) * dTheta;
         const float ct = std::cos(theta);
