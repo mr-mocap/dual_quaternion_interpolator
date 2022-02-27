@@ -13,7 +13,7 @@ class QAxisAngle : public QObject
     Q_PROPERTY( QVector3D axis   READ axis   WRITE setAxis  NOTIFY axisChanged  )
     Q_PROPERTY( float     angle  READ angle  WRITE setAngle NOTIFY angleChanged )
 
-    QML_ELEMENT
+    QML_NAMED_ELEMENT(AxisAngle)
 public:
     explicit QAxisAngle(QObject *parent = nullptr);
 

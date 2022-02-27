@@ -19,7 +19,7 @@ class QDualQuaternion : public QObject
     Q_PROPERTY( QVector3D   rotationaxes  READ rotationAxes                      NOTIFY valueChanged )
     Q_PROPERTY( float       rotationangle READ rotationAngle                     NOTIFY valueChanged )
 
-    QML_ELEMENT
+    QML_NAMED_ELEMENT(DualQuaternion)
 public:
     explicit QDualQuaternion( QObject* parent = nullptr );
 

@@ -16,7 +16,7 @@ class QDualQuaternionInterpolator : public QObject
     Q_PROPERTY( float            fraction READ fraction WRITE setFraction NOTIFY valueChanged )
     Q_PROPERTY( QDualQuaternion *result   READ result                     NOTIFY valueChanged )
 
-    QML_ELEMENT
+    QML_NAMED_ELEMENT(DualQuaternionInterpolator)
 public:
     explicit QDualQuaternionInterpolator(QObject *parent = nullptr);
 

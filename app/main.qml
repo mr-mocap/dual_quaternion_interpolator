@@ -4,7 +4,7 @@ import Qt3D.Core 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import MathLib.Qt 1.0
+import include.math.qt 1.0
 
 Window {
     width: 900
@@ -15,7 +15,7 @@ Window {
     property vector3d initialAxis: Qt.vector3d(0, 1, 0)
     property vector3d finalAxis: Qt.vector3d(0, 1, 0)
 
-    QDualQuaternionInterpolator {
+    DualQuaternionInterpolator {
         id: dq_interpolator
         fraction: interpolation_slider.position
 

@@ -2,7 +2,7 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.12
 import Qt3D.Input 2.12
 import Qt3D.Extras 2.15
-import MathLib.Qt 1.0
+import include.math.qt 1.0
 
 
 Entity {
@@ -10,7 +10,7 @@ Entity {
 
     property vector3d   position: Qt.vector3d(0, 0, 0)
     property quaternion rotation: Qt.quaternion(1.0, 0.0, 0.0, 0.0)
-    property QAxisAngle defaultRotationAxis: QAxisAngle { axis: Qt.vector3d(0, 1, 0); angle: 0 }
+    property AxisAngle defaultRotationAxis: AxisAngle { axis: Qt.vector3d(0, 1, 0); angle: 0 }
     property Material   material: WireframeMaterial {
         id: disc_material
         effect: WireframeEffect {}
@@ -22,15 +22,14 @@ Entity {
     Entity {
         Transform {
             id: disc_transform
-            //rotation: root.rotation
+            scale3D: Qt.vector3d( 5.0, 5.0, 1.0 )
             rotation:  calculateRotationPerpendicularToRotationAxis(root.rotation, defaultRotationAxis.axis)
             translation: position
         }
 
-        TorusMesh {
+        DiskMesh {
             id: rotation_disc
-            radius: 5.0
-            minorRadius: 0.5
+            slices: 360
         }
         components: [ disc_transform, material, rotation_disc ]
     }

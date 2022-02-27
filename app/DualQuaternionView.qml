@@ -1,14 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import MathLib.Qt 1.0
+import include.math.qt 1.0
 
 Rectangle {
     id: base
     border.width: 1
     border.color: "black"
 
-    property QDualQuaternion value;
+    property DualQuaternion value;
 
     implicitHeight: grid.implicitHeight + grid.rowSpacing * grid.rows - 1
     implicitWidth: grid.implicitWidth + grid.columnSpacing * grid.columns - 1

@@ -12,6 +12,8 @@ CONFIG += resources_big
 
 SOURCES += \
         QAxisAngle.cpp \
+        QDiskGeometry.cpp \
+        QDiskMesh.cpp \
         QDualQuaternion.cpp \
         QDualQuaternionInterpolator.cpp \
         main.cpp
@@ -19,12 +21,12 @@ SOURCES += \
 RESOURCES += qml.qrc \
     shaders.qrc
 
-QML_IMPORT_NAME = MathLib.Qt
+QML_IMPORT_NAME = include.math.qt
 QML_IMPORT_MAJOR_VERSION = 1
 QML_IMPORT_MINOR_VERSION = 0
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH = include/math/Qt
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
@@ -58,6 +60,8 @@ OTHER_FILES += \
     main.qml
 
 HEADERS += \
+    QDiskGeometry.h \
+    QDiskMesh.h \
     include/math/ApproximatelyEqualTo.h \
     include/math/Conjugate.h \
     include/math/Dual.h \
